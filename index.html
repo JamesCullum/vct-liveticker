@@ -4,18 +4,19 @@
 		<meta charset="utf-8">
 		<title>VCT Liveticker - Web</title>
 		
-		<script src="https://cdn.onesignal.com/sdks/OneSignalSDK.js" async></script>
-		
 		<script src="https://cdnjs.cloudflare.com/ajax/libs/jquery/3.6.0/jquery.min.js" integrity="sha512-894YE6QWD5I59HgZOGReFYm4dnWc1Qt5NtvYSaNcOP+u1T9qYdvdihz0PPSiiqn/+/3e7Jo4EaG7TubfWGUrMQ==" crossorigin="anonymous" referrerpolicy="no-referrer" defer></script>
-		<script src="main.js" defer></script>
+		<script src="https://www.gstatic.com/firebasejs/8.10.0/firebase-app.js" defer></script>
+		<script src="https://www.gstatic.com/firebasejs/8.10.0/firebase-app-check.js" defer></script>
+		<script src="https://www.gstatic.com/firebasejs/8.10.0/firebase-messaging.js" defer></script>
+		<script src="https://www.gstatic.com/firebasejs/8.10.0/firebase-firestore.js" defer></script>
+		
+		<script src="scripts/firebase.js" defer></script>
+		<script src="scripts/ui.js" defer></script>
 	</head>
 	<body>
-		Hello World 123
-		
-		<select id="tag">
-			<option></option>
-			<option value="a">a</option>
-			<option value="b">b</option>
+		Subscribe to a match liveticker:<br>
+		<select id="tag" disabled>
+			<option>Loading...</option>
 		</select>
 	</body>
 </html>
