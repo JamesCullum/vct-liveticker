@@ -42,8 +42,8 @@
 				</li>
 			  </ul>
 			  <ul class="navbar-nav ms-md-auto">
-				<li class="nav-item">
-				  <a target="_blank" rel="noopener" class="nav-link" href="/profile"><i class="fa-solid fa-user"></i> Sign In</a>
+				<li class="nav-item" id="menu-profile">
+				  <a href="#" class="nav-link sign-in"><i class="fa-solid fa-user"></i> Sign In</a>
 				</li>
 			  </ul>
 			</div>
@@ -53,16 +53,25 @@
 		<div class="container" id="event-list"></div>
 		<div id="template-elements">
 			<div class="row mb-4 event-item">
-				<div class="col-12">
-					<h2 class="event-name"></h2>
+				<div class="col-12 event-container">
+					<h2 class="notification-subscribe">
+						<i class="fa-solid fa-bell fa-xs d-lg-none"></i>
+						<span class="event-name"></span>
+						<button type="button" class="btn btn-primary btn-lg pull-right d-none d-lg-block"><i class="fa-solid fa-bell"></i> Subscribe to event updates</button>
+					</h2>
+					<h2 class="notification-unsubscribe d-none">
+						<i class="fa-solid fa-bell-slash fa-xs d-lg-none"></i>
+						<span class="event-name"></span>
+						<button type="button" class="btn btn-secondary btn-lg pull-right d-none d-lg-block"><i class="fa-solid fa-bell-slash"></i> Unsubscribe from event updates</button>
+					</h2>
 				</div>
 			</div>
-			<div class="col-md-4 col-12 mr-2 mb-2 match-item">
+			<div class="col-sm-6 col-lg-4 col-12 mb-2 match-item">
 				<div class="card">
 					<div class="card-header">
 						<div class="row">
 							<div class="col-6 left-info"></div> 
-							<div class="col-6 text-right right-info" data-bs-toggle="tooltip" data-bs-placement="right"></div>
+							<div class="col-6 text-right right-info"></div>
 						</div>
 					</div>
 					<!-- <div class="h-match-preview">
@@ -81,14 +90,27 @@
 						<div class="h-match-eta"></div>
 					</div>-->
 					
-					<div class="row">
-						<div class="col-6 team-side" data-team="0">
-							<div class="team-name">Team Joy</div>
-							<div class="team-score">0</div>
+					<div class="card-body">
+						<div class="row">
+							<div class="col-6 team-side" data-team="0">
+								<div class="team-name">Team Joy</div>
+								<div class="team-score">0</div>
+							</div>
+							<div class="col-6 team-side" data-team="1">
+								<div class="team-name">Team Joy</div>
+								<div class="team-score">0</div>
+							</div>
 						</div>
-						<div class="col-6 team-side" data-team="1">
-							<div class="team-name">Team Joy</div>
-							<div class="team-score">0</div>
+					</div>
+					
+					<div class="card-footer">
+						<div class="row">
+							<div class="notification-subscribe col-12">
+								<button type="button" class="btn btn-sm"><i class="fa-solid fa-bell"></i> Subscribe to match updates</button>
+							</div>
+							<div class="notification-unsubscribe col-12 d-none">
+								<button type="button" class="btn btn-sm"><i class="fa-solid fa-bell-slash"></i> Unsubscribe from match updates</button>
+							</div>
 						</div>
 					</div>
 				</div>

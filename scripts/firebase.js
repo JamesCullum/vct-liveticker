@@ -30,25 +30,25 @@ db.collection("events").doc("current").get().then(doc => {
 		if(name == "_updated") continue
 		
 		const thisEventItem = $("#template-elements > .event-item").clone()
+		$(".event-container", thisEventItem).attr("data-subscription-type", "events").attr("data-subscription-label", name)
 		$(".event-name", thisEventItem).text(name)
 		
 		const matchDataList = []
 		if(1 in matchInventory) matchDataList.push(...matchInventory[1])
 		if(0 in matchInventory) matchDataList.push(...matchInventory[0])
-		if(2 in matchInventory) matchDataList.push(...matchInventory[2])
 		
 		for (let matchData of matchDataList) {
 			const thisMatchItem = $("#template-elements > .match-item").clone()
 			
 			//$(".card", thisMatchItem).addClass("bg-"+statusCardClassLookup[matchData.status])
 			thisMatchItem.addClass("match-status-" + matchData.status)
+				.attr("data-subscription-type", "matches").attr("data-subscription-label", matchData.id)
 			
 			$(".card-header .left-info", thisMatchItem).html(matchData.stage + "<br>" + matchData.time)
 			if(matchData.status == 1) matchData.timeDiff = '<i class="fa-solid fa-circle"></i>'
 			else if(matchData.status == 2) matchData.timeDiff = matchData.timeDiff.toUpperCase()+" AGO"
 			else matchData.timeDiff = "IN "+matchData.timeDiff.toUpperCase()
 			$(".card-header .right-info", thisMatchItem).html(statusLookup[matchData.status].toUpperCase() + "<br>" + matchData.timeDiff)
-			$(".card-header .right-info", thisMatchItem).attr("title", matchData.time)
 			
 			$('.team-side[data-team=0] .team-name', thisMatchItem).text(matchData.team1)
 			let score1 = "map1" in matchData ? matchData.map1 : "-"
