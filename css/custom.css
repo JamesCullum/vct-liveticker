@@ -1,0 +1,49 @@
+:root {
+	--bs-primary-rgb: 54,54,54;
+	--bs-body-bg: #dadadc;
+}
+
+body {
+	padding-top: 100px;
+}
+
+#template-elements {
+	display: none;
+}
+
+.mr-2 {
+	margin-right: 20px;
+}
+
+.text-right {
+	text-align: right;
+}
+
+.pull-right {
+	float: right !important;
+}
+
+.match-item .card {
+	padding-bottom: 10px;
+}
+
+.team-side[data-team="1"] {
+	text-align: right;
+	padding-right: 30px;
+}
+
+.team-side[data-team="0"] {
+	padding-left: 30px; 
+}
+
+.match-status-0 .right-info {
+	color: #888;
+}
+
+.match-status-1 .right-info {
+	color: #ce3b54;
+}
+
+.match-status-2 .right-info {
+	color: #288ed7;
+}
