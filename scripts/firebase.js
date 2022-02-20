@@ -66,17 +66,3 @@ db.collection("events").doc("current").get().then(doc => {
 		$("#event-list").append(thisEventItem)
 	}
 })
-
-/*
-db.collection("matches").where("status", "==", 1).orderBy(firebase.firestore.FieldPath.documentId()).limit(50).get().then(querySnapshot => {
-	querySnapshot.forEach(doc => {
-		const matchData = doc.data();
-		
-		let option = document.createElement('option');
-		option.value = doc.id;
-		option.innerText = matchData.team1 + ' vs '+matchData.team2+': ' + matchData.event;
-		$("#tag").append(option);
-	});
-	$("#tag").removeAttr("disabled").find("option:first").text("Select match");
-});
-*/

@@ -50,6 +50,7 @@ $("body").on("click", ".notification-subscribe, .notification-unsubscribe", asyn
 		subscription[category].push(label)
 	}
 	subscription._updated = new Date()
+	subscription._synced = false
 	
 	ownSubRef.set(subscription).then(() => {
 		console.log("updated subscription", subscription)
