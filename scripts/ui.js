@@ -37,8 +37,9 @@ $(".sign-in").click(async function(evt) {
 	await initNotificationProfile()
 })
 
+// Notification & Subscription
 window.msgToken = false
-window.subscription = {events: [], matches: []}
+window.subscription = {events: [], matches: [], mocked: true}
 window.ownSubRef = false
 $("body").on("click", ".notification-subscribe, .notification-unsubscribe", async function(evt) {
 	if(!msgToken) {
@@ -91,9 +92,12 @@ async function initNotificationProfile() {
 }
 
 function subscriptionUpdateUI() {
+	if("mocked" in subscription) return false
+	
 	$(".notification-subscribe").removeClass("d-none")
 	$(".notification-unsubscribe").addClass("d-none")
 	
+	let modified = false
 	for(const [category, labelList] of Object.entries(subscription)) {
 		if(!Array.isArray(labelList)) continue
 		
@@ -102,10 +106,49 @@ function subscriptionUpdateUI() {
 			//console.log("picker", '*[data-subscription-type="'+category+'"][data-subscription-label="'+subLabel+'"]', picker)
 			if(!picker.length) continue
 			
+			modified = true
 			$(".notification-subscribe", picker).addClass("d-none")
 			$(".notification-unsubscribe", picker).removeClass("d-none")
 		}
 	}
+	
+	return modified
+}
+
+function subscriptionUpdateUIWait(func, i) {
+	if(Notification.permission != "granted") return false
+	
+	if(typeof i == 'undefined') i = 5
+	if(i <= 0) return console.error("Timeout on subscriptionUpdateUIWait")
+	
+	if("mocked" in subscription) {
+		return setTimeout(() => {
+			subscriptionUpdateUIWait(func, i-1)
+		}, 500)
+	}
+	
+	subscriptionUpdateUI()
+	func()
+}
+
+function sortBySubscription(containerSelector, childSelector) {
+	subscriptionUpdateUIWait(() => {
+		$(containerSelector).each(function() {
+			const childs = $(this).children(childSelector).sort((a, b) => {
+				const aIsSubbed = $(".notification-unsubscribe", a).is(':visible')
+				const bIsSubbed = $(".notification-unsubscribe", b).is(':visible')
+				
+				if(aIsSubbed != bIsSubbed) {
+					return aIsSubbed ? -1 : 1
+				} else {
+					return b.textContent < a.textContent
+				}
+			})
+			$(this).append(childs)
+		})
+		
+		subscriptionUpdateUI()
+	})
 }
 
 function getMatchItem(matchData) {

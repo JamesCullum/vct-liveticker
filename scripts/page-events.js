@@ -24,5 +24,8 @@ db.collection("events").doc("current").get().then(doc => {
 		
 		$("#event-list").append(thisEventItem)
 	}
+	
+	sortBySubscription("#event-list", ".event-item")
+	sortBySubscription(".event-item", ".match-item")
 })
 
