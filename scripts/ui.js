@@ -1,3 +1,15 @@
+console.log("path", window.location.pathname)
+
+const pageScript = document.createElement('script')
+pageScript.async = true
+
+
+let scriptName = "events"
+if((match = /^\/(\w*)/.exec(window.location.pathname)) !== null) {
+	if(["events", "matches", "subscriptions"].includes(match[1])) scriptName = match[1]
+}
+pageScript.src = "/scripts/page-" + scriptName + ".js"
+document.head.appendChild(pageScript)
 
 // Profile
 if (Notification.permission == "granted") {
@@ -94,6 +106,32 @@ function subscriptionUpdateUI() {
 			$(".notification-unsubscribe", picker).removeClass("d-none")
 		}
 	}
+}
+
+function getMatchItem(matchData) {
+	const thisMatchItem = $("#template-elements > .match-item").clone()
+	
+	//$(".card", thisMatchItem).addClass("bg-"+statusCardClassLookup[matchData.status])
+	thisMatchItem.addClass("match-status-" + matchData.status)
+		.attr("data-subscription-type", "matches").attr("data-subscription-label", matchData.id)
+	
+	$(".card-header .left-info", thisMatchItem).html(matchData.stage + "<br>" + matchData.time)
+	if(matchData.status == 1) matchData.timeDiff = '<i class="fa-solid fa-circle"></i>'
+	else if(matchData.status == 2) matchData.timeDiff = matchData.timeDiff.toUpperCase()+" AGO"
+	else matchData.timeDiff = "IN "+matchData.timeDiff.toUpperCase()
+	$(".card-header .right-info", thisMatchItem).html(statusLookup[matchData.status].toUpperCase() + "<br>" + matchData.timeDiff)
+	
+	$('.team-side[data-team=0] .team-name', thisMatchItem).text(matchData.team1)
+	let score1 = "map1" in matchData ? matchData.map1 : "-"
+	if("round1" in matchData) score1 += " (" + matchData.round1 + ")"
+	$('.team-side[data-team=0] .team-score', thisMatchItem).text(score1)
+	
+	$('.team-side[data-team=1] .team-name', thisMatchItem).text(matchData.team2)
+	let score2 = "map2" in matchData ? matchData.map2 : "-"
+	if("round2" in matchData) score2 += " (" + matchData.round2 + ")"
+	$('.team-side[data-team=1] .team-score', thisMatchItem).text(score2)
+	
+	return thisMatchItem
 }
 
 // https://stackoverflow.com/a/5767357/1424378

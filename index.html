@@ -3,7 +3,7 @@
 	<head>
 		<meta charset="utf-8">
 		<meta name="viewport" content="width=device-width, initial-scale=1">
-		<title>VLR Ticker</title>
+		<title>VCT Ticker</title>
 		
 		<script src="https://cdnjs.cloudflare.com/ajax/libs/jquery/3.6.0/jquery.min.js" integrity="sha512-894YE6QWD5I59HgZOGReFYm4dnWc1Qt5NtvYSaNcOP+u1T9qYdvdihz0PPSiiqn/+/3e7Jo4EaG7TubfWGUrMQ==" crossorigin="anonymous" referrerpolicy="no-referrer" defer></script>
 		<script src="https://www.gstatic.com/firebasejs/8.10.0/firebase-app.js" defer></script>
@@ -11,19 +11,18 @@
 		<script src="https://www.gstatic.com/firebasejs/8.10.0/firebase-messaging.js" defer></script>
 		<script src="https://www.gstatic.com/firebasejs/8.10.0/firebase-firestore.js" defer></script>
 		<script src="https://kit.fontawesome.com/447036a036.js" crossorigin="anonymous" async></script>
-		<script src="scripts/bootstrap.bundle.min.js" async></script>
+		<script src="/scripts/bootstrap.bundle.min.js" async></script>
 		
-		<script src="scripts/firebase.js" defer></script>
-		<script src="scripts/ui.js" defer></script>
+		<script src="/scripts/firebase.js" defer></script>
+		<script src="/scripts/ui.js" defer></script>
 		
-		<link rel="stylesheet" href="css/bootstrap.min.css">
-		<!-- <link rel="stylesheet" href="css/bootstrap_custom.min.css"> -->
-		<link rel="stylesheet" href="css/custom.css">
+		<link rel="stylesheet" href="/css/bootstrap.min.css">
+		<link rel="stylesheet" href="/css/custom.css">
 	</head>
 	<body>
 		<div class="navbar navbar-expand-lg fixed-top navbar-dark bg-primary">
 		  <div class="container">
-			<a href="/" class="navbar-brand">VLR Ticker</a>
+			<a href="/" class="navbar-brand">VCT Ticker</a>
 			<button class="navbar-toggler" type="button" data-bs-toggle="collapse" data-bs-target="#navbarResponsive" aria-controls="navbarResponsive" aria-expanded="false" aria-label="Toggle navigation">
 			  <span class="navbar-toggler-icon"></span>
 			</button>
@@ -35,9 +34,9 @@
 				<li class="nav-item dropdown">
 				  <a class="nav-link dropdown-toggle" data-bs-toggle="dropdown" href="#" id="themes">Matches <span class="caret"></span></a>
 				  <div class="dropdown-menu" aria-labelledby="themes">
-					<a class="dropdown-item" href="../default/">Upcoming</a>
-					<a class="dropdown-item" href="../cerulean/">Live</a>
-					<a class="dropdown-item" href="../cosmo/">Results</a>
+					<a class="dropdown-item" href="/matches/upcoming">Upcoming</a>
+					<a class="dropdown-item" href="/matches/live">Live</a>
+					<a class="dropdown-item" href="/matches/results">Results</a>
 				  </div>
 				</li>
 			  </ul>
@@ -74,31 +73,16 @@
 							<div class="col-6 text-right right-info"></div>
 						</div>
 					</div>
-					<!-- <div class="h-match-preview">
-						<div class="h-match-preview-time">2:00 PM CET</div>
-						<div class="h-match-preview-event">Champions Tour Vietnam Stage 1: Challengers</div>
-						<div class="h-match-preview-series">Group Stage: Decider (A)</div>
-					</div> 
-					<div class="h-match-team" data-team="0" style="vertical-align: middle;">
-						<div class="h-match-team-name">The Meaps</div>
-						<div class="h-match-team-score mod-count js-spoiler">1</div>
-						<div class="h-match-eta">LIVE</div>
-					</div>
-					<div class="h-match-team" data-team="1" style="vertical-align: middle;">
-						<div class="h-match-team-name">Team Joy</div>
-						<div class="h-match-team-score mod-count js-spoiler">0</div>
-						<div class="h-match-eta"></div>
-					</div>-->
 					
 					<div class="card-body">
 						<div class="row">
 							<div class="col-6 team-side" data-team="0">
-								<div class="team-name">Team Joy</div>
-								<div class="team-score">0</div>
+								<div class="team-name"></div>
+								<div class="team-score">-</div>
 							</div>
 							<div class="col-6 team-side" data-team="1">
-								<div class="team-name">Team Joy</div>
-								<div class="team-score">0</div>
+								<div class="team-name"></div>
+								<div class="team-score">-</div>
 							</div>
 						</div>
 					</div>
