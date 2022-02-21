@@ -18,23 +18,22 @@ if (Notification.permission == "granted") {
 	$("body > .container").prepend(`<div class="alert alert-dismissible alert-info mb-4" id="notification-start-hint">
 		<button type="button" class="btn-close" data-bs-dismiss="alert" id="disabled-notification-hint"></button>
 		If you want to receive push notifications or live updates, please enable notifications.<br>
-		<button type="button" class="btn btn-light" id="enable-notifications">Start receiving updates</button>
+		<button type="button" class="btn btn-light enable-notifications">Start receiving updates</button>
 	</div>`)
 	
 	$("#disabled-notification-hint").click(function(evt) {
 		localStorage.setItem("disabled-notification-hint", "1")
 	})
-	
-	$("#enable-notifications").click(function(evt) {
-		evt.preventDefault()
-		Notification.requestPermission(async function (permission) {
-			if (permission === "granted") await initNotificationProfile()
-		});
-	})
 }
 $(".sign-in").click(async function(evt) {
 	evt.preventDefault()
 	await initNotificationProfile()
+})
+$("body").on("click", ".enable-notifications", function(evt) {
+	evt.preventDefault()
+	Notification.requestPermission(async function (permission) {
+		if (permission === "granted") await initNotificationProfile()
+	});
 })
 
 // Notification & Subscription
@@ -62,12 +61,10 @@ $("body").on("click", ".notification-subscribe, .notification-unsubscribe", asyn
 		// Sub
 		subscription[category].push(label)
 	}
-	subscription._updated = new Date()
-	subscription._synced = false
-	
-	ownSubRef.set(subscription).then(() => {
+	syncNewSubscriptions().then(() => {
 		console.log("updated subscription", subscription)
 	})
+	
 	subscriptionUpdateUI()
 })
 
@@ -83,9 +80,11 @@ async function initNotificationProfile() {
 	const querySnapshot = await ownSubRef.get()
 	if(!querySnapshot.exists) {
 		console.log("doesnt exist yet");
+		delete subscription.mocked
 		return false
 	}
 	subscription = querySnapshot.data()
+	subscription._updated = subscription._updated.toDate()
 	console.log("Subscriptions: ", subscription)
 	
 	subscriptionUpdateUI()
@@ -115,20 +114,21 @@ function subscriptionUpdateUI() {
 	return modified
 }
 
-function subscriptionUpdateUIWait(func, i) {
-	if(Notification.permission != "granted") return false
+function subscriptionUpdateUIWait(resolve, reject, i) {
+	if(typeof reject != 'function') reject = (str) => console.error(str)
+	if(Notification.permission != "granted" && typeof i == 'undefined') return reject("No permission")
 	
 	if(typeof i == 'undefined') i = 5
-	if(i <= 0) return console.error("Timeout on subscriptionUpdateUIWait")
+	if(i !== false && i <= 0) return reject("Timeout on subscriptionUpdateUIWait")
 	
 	if("mocked" in subscription) {
 		return setTimeout(() => {
-			subscriptionUpdateUIWait(func, i-1)
+			subscriptionUpdateUIWait(resolve, reject, i !== false ? i-1 : false)
 		}, 500)
 	}
 	
 	subscriptionUpdateUI()
-	func()
+	resolve()
 }
 
 function sortBySubscription(containerSelector, childSelector) {
@@ -175,6 +175,13 @@ function getMatchItem(matchData) {
 	$('.team-side[data-team=1] .team-score', thisMatchItem).text(score2)
 	
 	return thisMatchItem
+}
+
+function syncNewSubscriptions() {
+	subscription._updated = new Date()
+	subscription._synced = false
+	
+	return ownSubRef.set(subscription)
 }
 
 // https://stackoverflow.com/a/5767357/1424378

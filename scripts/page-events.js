@@ -1,6 +1,14 @@
 
 db.collection("events").doc("current").get().then(doc => {
 	const events = Object.entries(doc.data());
+	
+	if(!events.length) {
+		return $("#event-list").append(`<div class="alert alert-primary">
+			<h3>There appears to be some downtime!</h3>
+			<p>Check <a href="https://www.vlr.gg/" target="_blank" rel="noopener noreferrer">vlr.gg</a> to see if it's Riot or us.</p>
+		</div>`)
+	}
+	
 	events.sort(([aName, aVal], [bName, bVal]) => {
 		return bName < aName;
 	})
