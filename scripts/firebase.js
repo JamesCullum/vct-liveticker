@@ -36,6 +36,7 @@ db.collection("events").doc("current").get().then(doc => {
 		const matchDataList = []
 		if(1 in matchInventory) matchDataList.push(...matchInventory[1])
 		if(0 in matchInventory) matchDataList.push(...matchInventory[0])
+		if(2 in matchInventory) matchDataList.push(...matchInventory[2])
 		
 		for (let matchData of matchDataList) {
 			const thisMatchItem = $("#template-elements > .match-item").clone()
