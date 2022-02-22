@@ -202,11 +202,14 @@ function getMatchItem(matchData) {
 	thisMatchItem.addClass("match-status-" + matchData.status)
 		.attr("data-subscription-type", "matches").attr("data-subscription-label", matchData.id)
 	
-	$(".card-header .left-info", thisMatchItem).html(matchData.stage + "<br>" + matchData.time)
-	if(matchData.status == 1) matchData.timeDiff = '<i class="fa-solid fa-circle"></i>'
-	else if(matchData.status == 2) matchData.timeDiff = matchData.timeDiff.toUpperCase()+" AGO"
-	else matchData.timeDiff = "IN "+matchData.timeDiff.toUpperCase()
-	$(".card-header .right-info", thisMatchItem).html(statusLookup[matchData.status].toUpperCase() + "<br>" + matchData.timeDiff)
+	const date = matchData.date.toDate()
+	$(".card-header .left-info", thisMatchItem).html(matchData.stage + "<br>" + date.toLocaleString())
+	
+	let timeDiff = get_time_diff(date)
+	if(matchData.status == 1) timeDiff = '<i class="fa-solid fa-circle"></i>'
+	else if(matchData.status == 2) timeDiff = timeDiff + " AGO"
+	else timeDiff = "IN " + timeDiff
+	$(".card-header .right-info", thisMatchItem).html(statusLookup[matchData.status].toUpperCase() + "<br>" + timeDiff)
 	
 	$('.team-side[data-team=0] .team-name', thisMatchItem).text(matchData.team1)
 	let score1 = "map1" in matchData ? matchData.map1 : "-"
@@ -235,4 +238,29 @@ function removeItemOnce(arr, value) {
     arr.splice(index, 1);
   }
   return arr;
+}
+
+// https://stackoverflow.com/a/18103175/1424378
+function get_time_diff( datetime )
+{
+    var datetime = new Date( datetime ).getTime();
+    var now = new Date().getTime();
+
+    if( isNaN(datetime) ) return "";
+
+    if (datetime < now) {
+        var milisec_diff = now - datetime;
+    }else{
+        var milisec_diff = datetime - now;
+    }
+
+    var days = Math.floor(milisec_diff / 1000 / 60 / (60 * 24));
+    var date_diff = new Date(milisec_diff);
+
+	let finalStr = ""
+	if(days > 0) return days + " DAYS"
+	if(date_diff.getHours() > 0) finalStr += date_diff.getHours() + "H "
+	if(date_diff.getMinutes() > 0) finalStr += date_diff.getMinutes() + "M "
+	if(date_diff.getHours() == 0 && date_diff.getSeconds() > 0) finalStr += date_diff.getSeconds() + "S "
+    return finalStr
 }
