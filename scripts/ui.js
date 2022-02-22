@@ -73,7 +73,14 @@ async function initNotificationProfile() {
 		msgToken = await messaging.getToken({vapidKey: "BHsrbLQQiNSDUQzw6EgeO-45Arty5Pct9lDQWevJpsL2bzts_o0BZL7MmZt7lDcoFjd2mSumps5UByzBaboPCxU"})
 	} catch(error) {
 		console.error(error)
-		alert("Connection to Firebase Cloud Messaging has failed. Any adblockers that might block such connection? Please check the console for details.")
+		$("body > .container").prepend(`<div class="alert alert-info mb-4">
+			Firebase failed to connect to the messaging API.<br>
+			This can be caused by missing notification permissions, network connectivity issues, browser incompatibility or an adblocker.
+			Please try a different browser (e.g. Chrome) and disable adblock to fix the issue.
+			<br><br>
+			<b>Error Message:</b> `+error.message+`
+		</div>`)
+		return
 	}
 	ownSubRef = db.collection("push_subscribers").doc(msgToken)
 	console.log("token", msgToken)
@@ -203,7 +210,7 @@ function getMatchItem(matchData) {
 		.attr("data-subscription-type", "matches").attr("data-subscription-label", matchData.id)
 	
 	const date = matchData.date.toDate()
-	$(".card-header .left-info", thisMatchItem).html(matchData.stage + "<br>" + date.toLocaleString())
+	$(".card-header .left-info", thisMatchItem).html(matchData.stage + "<br>" + dateFormat(date))
 	
 	let timeDiff = get_time_diff(date)
 	if(matchData.status == 1) timeDiff = '<i class="fa-solid fa-circle"></i>'
@@ -229,6 +236,13 @@ function syncNewSubscriptions() {
 	subscription._synced = false
 	
 	return ownSubRef.set(subscription)
+}
+
+function dateFormat(dateObj) {
+	return dateObj.toLocaleString(navigator.language || navigator.userLanguage, {
+		timeZone: Intl.DateTimeFormat().resolvedOptions().timeZone,
+		year: 'numeric', month: 'numeric', day: 'numeric', hour: '2-digit', minute: '2-digit',
+	})
 }
 
 // https://stackoverflow.com/a/5767357/1424378

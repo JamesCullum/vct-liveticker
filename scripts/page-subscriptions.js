@@ -53,7 +53,7 @@ subscriptionUpdateUIWait(() => {
 	
 	if(!("_updated" in subscription)) return console.log("Currently no server profile")
 	
-	$("#sub-updated").text(subscription._updated.toLocaleString())
+	$("#sub-updated").text(dateFormat(subscription._updated))
 	if(!subscription._synced) {
 		$("#sub-synced").text("No - please wait up to five minutes")
 	}
