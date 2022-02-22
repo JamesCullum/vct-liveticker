@@ -69,7 +69,12 @@ $("body").on("click", ".notification-subscribe, .notification-unsubscribe", asyn
 })
 
 async function initNotificationProfile() {
-	msgToken = await messaging.getToken({vapidKey: "BHsrbLQQiNSDUQzw6EgeO-45Arty5Pct9lDQWevJpsL2bzts_o0BZL7MmZt7lDcoFjd2mSumps5UByzBaboPCxU"})
+	try {
+		msgToken = await messaging.getToken({vapidKey: "BHsrbLQQiNSDUQzw6EgeO-45Arty5Pct9lDQWevJpsL2bzts_o0BZL7MmZt7lDcoFjd2mSumps5UByzBaboPCxU"})
+	} catch(error) {
+		console.error(error)
+		alert("Connection to Firebase Cloud Messaging has failed. Any adblockers that might block such connection? Please check the console for details.")
+	}
 	ownSubRef = db.collection("push_subscribers").doc(msgToken)
 	console.log("token", msgToken)
 	
@@ -131,7 +136,7 @@ function subscriptionUpdateUIWait(resolve, reject, i) {
 	resolve()
 }
 
-function sortBySubscription(containerSelector, childSelector) {
+function sortBySubscription(containerSelector, childSelector, func) {
 	subscriptionUpdateUIWait(() => {
 		$(containerSelector).each(function() {
 			const childs = $(this).children(childSelector).sort((a, b) => {
@@ -148,8 +153,47 @@ function sortBySubscription(containerSelector, childSelector) {
 		})
 		
 		subscriptionUpdateUI()
+		
+		if(typeof func == 'function') func()
 	})
 }
+
+// Collapsible for mobile
+function limitExpandItems(containerSelector, childSelector, expandBreakpoint) {
+	$(containerSelector).each(function() {
+		const eventItem = $(this)
+		
+		let i = 0
+		const childs = $(childSelector, eventItem)
+		if(childs.length <= expandBreakpoint) return false
+		
+		childs.each(function() {
+			i++
+			
+			if(i == expandBreakpoint) {
+				eventItem.append(`<div class="col-12 d-block d-sm-none expand-items" data-breakpoint="`+expandBreakpoint+`">
+					<div class="d-grid gap-2">
+						<button class="btn btn-lg btn-primary" type="button">See more</button>
+					</div>
+				</div>`)
+			} else if(i > expandBreakpoint) {
+				$(this).addClass("d-none d-sm-block")
+			}
+		})
+	})
+}
+$("body").on("click", ".expand-items", function(evt) {
+	const container = $(this).closest(".expand-container")
+	const expandBreakpoint = parseInt($(this).attr("data-breakpoint"))
+	const childs = container.find("> .d-none:not(.expand-items)")
+	const hasMore = childs.length > expandBreakpoint
+	
+	$(childs.slice(0, expandBreakpoint)).each(function() {
+		$(this).removeClass("d-none d-sm-block")
+	})
+	
+	if(!hasMore) $(this).remove()
+})
 
 function getMatchItem(matchData) {
 	const thisMatchItem = $("#template-elements > .match-item").clone()

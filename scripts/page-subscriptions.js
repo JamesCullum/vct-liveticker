@@ -9,21 +9,20 @@ if(Notification.permission != "granted") {
 	}
 }
 
-// TODO
 subscriptionUpdateUIWait(() => {
 	$("body > .container").append(`
 		<form id="subscription-form">
 			<fieldset>
 				<legend>Manage Subscription</legend>
 				<div class="form-group row">
-					<p class="col-sm-2">Last Updated</label>
-					<div class="col-sm-10 text-right">
+					<p class="col-4 col-sm-2">Last Updated</label>
+					<div class="col-8 col-sm-10 text-right">
 						<p id="sub-updated">Never</p>
 					</div>
 				</div>
 				<div class="form-group row">
-					<p class="col-sm-2">Synchronized</label>
-					<div class="col-sm-10 text-right">
+					<p class="col-4 col-sm-2">Synchronized</label>
+					<div class="col-8 col-sm-10 text-right">
 						<p id="sub-synced">Yes</p>
 					</div>
 				</div>

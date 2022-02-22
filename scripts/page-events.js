@@ -25,6 +25,11 @@ db.collection("events").doc("current").get().then(doc => {
 		if(0 in matchInventory) matchDataList.push(...matchInventory[0])
 		if(2 in matchInventory) matchDataList.push(...matchInventory[2])
 		
+		// debugging
+		/*while(matchDataList.length > 0 && matchDataList.length < 6) {
+			matchDataList.push(...matchDataList)
+		}*/
+		
 		for (let matchData of matchDataList) {		
 			const thisMatchItem = getMatchItem(matchData)
 			thisEventItem.append(thisMatchItem)
@@ -34,6 +39,9 @@ db.collection("events").doc("current").get().then(doc => {
 	}
 	
 	sortBySubscription("#event-list", ".event-item")
-	sortBySubscription(".event-item", ".match-item")
+	sortBySubscription(".event-item", ".match-item", () => {
+		limitExpandItems(".event-item", ".match-item", 3)
+	})
+	
 })
 
