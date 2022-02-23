@@ -13,10 +13,8 @@ const appCheck = firebase.appCheck();
 appCheck.activate('6LeIsXYeAAAAAObgcWGuMGqLdNvp86fVIrlhcg1x', true);
 
 const messaging = firebase.messaging();
-messaging.onMessage(payload => {
+/*messaging.onMessage(payload => {
 	console.log("Message received. ", payload);
-});
+});*/
 
 const db = firebase.firestore();
-const statusLookup = {0: "Upcoming", 1: "Live", 2: "Finished"}
-const statusCardClassLookup = {0: "secondary", 1: "danger", 2: "success"}

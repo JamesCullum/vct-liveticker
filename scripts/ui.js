@@ -1,3 +1,7 @@
+const statusLookup = {0: "Upcoming", 1: "Live", 2: "Finished"}
+const statusCardClassLookup = {0: "secondary", 1: "danger", 2: "success"}
+
+// Load page script
 const pageScript = document.createElement('script')
 pageScript.async = true
 let scriptName = "events"
@@ -5,10 +9,11 @@ if((match = /^\/(\w*)/.exec(window.location.pathname)) !== null) {
 	if(["events", "matches", "subscriptions"].includes(match[1])) scriptName = match[1]
 }
 pageScript.src = "/scripts/page-" + scriptName + ".js"
+
 document.head.appendChild(pageScript)
 
 
-
+// Methods
 function sortBySubscription(containerSelector, childSelector, func) {
 	subscriptionUpdateUIWait(() => {
 		$(containerSelector).each(function() {
@@ -97,8 +102,7 @@ function getMatchItem(matchData) {
 	
 	return thisMatchItem
 }
-
-// Update relative time
+// Update relative time every second
 setInterval(function() {
 	let tmpDate, tmpStatus
 	$(".card-header .right-info .event-date-diff").not("[data-status=1]").each(function() {

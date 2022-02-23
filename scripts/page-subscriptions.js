@@ -10,6 +10,8 @@ if(Notification.permission != "granted") {
 }
 
 subscriptionUpdateUIWait(() => {
+	$("#loader").remove()
+	
 	$("body > .container").append(`
 		<form id="subscription-form">
 			<fieldset>

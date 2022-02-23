@@ -4,9 +4,9 @@ db.collection("events").doc("current").onSnapshot(doc => {
 	$("#event-list").html("")
 	
 	if(!events.length) {
-		return $("#event-list").append(`<div class="alert alert-primary">
+		return $("#event-list").append(`<div class="alert alert-primary alert-downtime">
 			<h3>There appears to be some downtime!</h3>
-			<p>Check <a href="https://www.vlr.gg/" target="_blank" rel="noopener noreferrer">vlr.gg</a> to see if it's Riot or us.</p>
+			<p>Check <a href="https://www.vlr.gg/" target="_blank" rel="noopener noreferrer">vlr.gg</a> to see if it's Riots schedule or our servers.</p>
 		</div>`)
 	}
 	
