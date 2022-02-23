@@ -52,7 +52,7 @@ $("body").on("click", ".notification-subscribe, .notification-unsubscribe", asyn
 	syncNewSubscriptions().then(() => {
 		console.log("updated subscription", subscription)
 	}).catch(error => {
-		alert("Subscription failed: "+error.message)
+		alert("Subscription sync failed: "+error.message)
 	})
 	
 	subscriptionUpdateUI()

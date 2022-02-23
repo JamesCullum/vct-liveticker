@@ -129,6 +129,8 @@ subscriptionUpdateUIWait(() => {
 		syncNewSubscriptions().then(() => {
 			console.log("updated subscription", subscription)
 			window.location = window.location
+		}).catch(error => {
+			alert("Subscription sync failed: "+error.message)
 		})
 	})
 	
