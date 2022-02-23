@@ -9,7 +9,6 @@ if((match = /^\/(\w*)/.exec(window.location.pathname)) !== null) {
 	if(["events", "matches", "subscriptions"].includes(match[1])) scriptName = match[1]
 }
 pageScript.src = "/scripts/page-" + scriptName + ".js"
-
 document.head.appendChild(pageScript)
 
 

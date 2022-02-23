@@ -53,10 +53,6 @@ $("body").on("click", ".notification-subscribe, .notification-unsubscribe", asyn
 		console.log("updated subscription", subscription)
 	}).catch(error => {
 		alert("Subscription sync failed: "+error.message)
-		
-		if(error.message.indexOf("permission") != -1) {
-			alert(JSON.stringify([msgToken.length, subscription]))
-		}
 	})
 	
 	subscriptionUpdateUI()
