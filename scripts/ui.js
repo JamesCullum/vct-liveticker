@@ -135,9 +135,15 @@ function removeItemOnce(arr, value) {
 
 function get_time_diff_label(matchStatus, dateTime) {
 	let timeDiff = get_time_diff(dateTime)
-	if(matchStatus == 1) return '<i class="fa-solid fa-circle"></i>'
-	else if(matchStatus == 2) return timeDiff + " AGO"
-	else return "IN " + timeDiff
+	
+	if(matchStatus == 1) {
+		return '<i class="fa-solid fa-circle"></i>'
+	} else if(matchStatus == 2) {
+		return timeDiff + " AGO"
+	} else {
+		let now = new Date()
+		return now < dateTime ? "IN " + timeDiff : "Starting..."
+	}
 }
 
 // https://stackoverflow.com/a/18103175/1424378
