@@ -55,7 +55,7 @@ $("body").on("click", ".notification-subscribe, .notification-unsubscribe", asyn
 		alert("Subscription sync failed: "+error.message)
 		
 		if(error.message.indexOf("permission") != -1) {
-			alert(JSON.stringify(subscription))
+			alert(JSON.stringify([msgToken.length, subscription]))
 		}
 	})
 	
