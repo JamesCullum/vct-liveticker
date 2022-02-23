@@ -51,10 +51,8 @@ $("body").on("click", ".notification-subscribe, .notification-unsubscribe", asyn
 	}
 
 	syncNewSubscriptions().then(() => {
-		console.log("updated subscription", subscription)
+		console.log("updated subscription successfully")
 	}).catch(error => {
-		console.log("Subscription failed syncing", msgToken, subscription)
-		console.error(error)
 		alert("Subscription sync failed: "+error.message)
 	})
 	
@@ -98,6 +96,7 @@ function syncNewSubscriptions() {
 	subscription._updated = new Date()
 	subscription._synced = false
 	
+	console.log("Subscription to sync", subscription)
 	return ownSubRef.set(subscription)
 }
 
