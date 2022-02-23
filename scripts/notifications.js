@@ -49,9 +49,12 @@ $("body").on("click", ".notification-subscribe, .notification-unsubscribe", asyn
 		// Sub
 		subscription[category].push(label)
 	}
+
 	syncNewSubscriptions().then(() => {
 		console.log("updated subscription", subscription)
 	}).catch(error => {
+		console.log("Subscription failed syncing", msgToken, subscription)
+		console.error(error)
 		alert("Subscription sync failed: "+error.message)
 	})
 	
