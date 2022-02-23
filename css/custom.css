@@ -42,3 +42,9 @@ body {
 .match-status-2 .right-info {
 	color: #288ed7;
 }
+
+.left-info p, .right-info p {
+	margin: 0;
+	overflow: hidden;
+	text-overflow: ellipsis;
+}

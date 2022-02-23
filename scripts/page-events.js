@@ -1,6 +1,7 @@
 
-db.collection("events").doc("current").get().then(doc => {
+db.collection("events").doc("current").onSnapshot(doc => {
 	const events = Object.entries(doc.data());
+	$("#event-list").html("")
 	
 	if(!events.length) {
 		return $("#event-list").append(`<div class="alert alert-primary">
@@ -22,8 +23,18 @@ db.collection("events").doc("current").get().then(doc => {
 		
 		const matchDataList = []
 		if(1 in matchInventory) matchDataList.push(...matchInventory[1])
-		if(0 in matchInventory) matchDataList.push(...matchInventory[0])
-		if(2 in matchInventory) matchDataList.push(...matchInventory[2])
+			
+		const notLiveEvents = []
+		if(2 in matchInventory) notLiveEvents.push(...matchInventory[2])
+		if(0 in matchInventory) notLiveEvents.push(...matchInventory[0])
+		
+		const now = new Date()
+		notLiveEvents.sort((a, b) => {
+			const aDateDiff = Math.abs(now - a.date.toDate())
+			const bDateDiff = Math.abs(now - b.date.toDate())
+			return aDateDiff > bDateDiff
+		})
+		matchDataList.push(...notLiveEvents)
 		
 		// debugging
 		/*while(matchDataList.length > 0 && matchDataList.length < 6) {

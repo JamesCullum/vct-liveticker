@@ -1,9 +1,5 @@
-console.log("path", window.location.pathname)
-
 const pageScript = document.createElement('script')
 pageScript.async = true
-
-
 let scriptName = "events"
 if((match = /^\/(\w*)/.exec(window.location.pathname)) !== null) {
 	if(["events", "matches", "subscriptions"].includes(match[1])) scriptName = match[1]
@@ -11,141 +7,13 @@ if((match = /^\/(\w*)/.exec(window.location.pathname)) !== null) {
 pageScript.src = "/scripts/page-" + scriptName + ".js"
 document.head.appendChild(pageScript)
 
-// Profile
-if (Notification.permission == "granted") {
-	initNotificationProfile().then(() => {})
-} else if(!localStorage.getItem("disabled-notification-hint")) {
-	$("body > .container").prepend(`<div class="alert alert-dismissible alert-info mb-4" id="notification-start-hint">
-		<button type="button" class="btn-close" data-bs-dismiss="alert" id="disabled-notification-hint"></button>
-		If you want to receive push notifications or live updates, please enable notifications.<br>
-		<button type="button" class="btn btn-light enable-notifications">Start receiving updates</button>
-	</div>`)
-	
-	$("#disabled-notification-hint").click(function(evt) {
-		localStorage.setItem("disabled-notification-hint", "1")
-	})
-}
-$(".sign-in").click(async function(evt) {
-	evt.preventDefault()
-	await initNotificationProfile()
-})
-$("body").on("click", ".enable-notifications", function(evt) {
-	evt.preventDefault()
-	Notification.requestPermission(async function (permission) {
-		if (permission === "granted") await initNotificationProfile()
-	});
-})
 
-// Notification & Subscription
-window.msgToken = false
-window.subscription = {events: [], matches: [], mocked: true}
-window.ownSubRef = false
-$("body").on("click", ".notification-subscribe, .notification-unsubscribe", async function(evt) {
-	if(!msgToken) {
-		await initNotificationProfile() // test if this works if we just wait
-	}
-	
-	const notifWrapper = $(this).closest("[data-subscription-type][data-subscription-label]")
-	const category = notifWrapper.attr("data-subscription-type")
-	let label = notifWrapper.attr("data-subscription-label")
-	
-	if(category == "matches") label = parseInt(label)
-	console.log("un/subscribe", category, label)
-	
-	if(!(category in subscription)) subscription[category] = []
-	
-	if(subscription[category].includes(label)) {
-		// Unsub
-		subscription[category] = removeItemOnce(subscription[category], label)
-	} else {
-		// Sub
-		subscription[category].push(label)
-	}
-	syncNewSubscriptions().then(() => {
-		console.log("updated subscription", subscription)
-	})
-	
-	subscriptionUpdateUI()
-})
-
-async function initNotificationProfile() {
-	try {
-		msgToken = await messaging.getToken({vapidKey: "BHsrbLQQiNSDUQzw6EgeO-45Arty5Pct9lDQWevJpsL2bzts_o0BZL7MmZt7lDcoFjd2mSumps5UByzBaboPCxU"})
-	} catch(error) {
-		console.error(error)
-		$("body > .container").prepend(`<div class="alert alert-info mb-4">
-			Firebase failed to connect to the messaging API.<br>
-			This can be caused by missing notification permissions, network connectivity issues, browser incompatibility or an adblocker.
-			Please try a different browser (e.g. Chrome) and disable adblock to fix the issue.
-			<br><br>
-			<b>Error Message:</b> `+error.message+`
-		</div>`)
-		return
-	}
-	ownSubRef = db.collection("push_subscribers").doc(msgToken)
-	console.log("token", msgToken)
-	
-	$("#notification-start-hint").remove()
-	$("#menu-profile").html(`<a class="nav-link" href="/subscriptions">Manage Subscriptions</a>`)
-	
-	// Check current subscriptions
-	const querySnapshot = await ownSubRef.get()
-	if(!querySnapshot.exists) {
-		console.log("doesnt exist yet");
-		delete subscription.mocked
-		return false
-	}
-	subscription = querySnapshot.data()
-	subscription._updated = subscription._updated.toDate()
-	console.log("Subscriptions: ", subscription)
-	
-	subscriptionUpdateUI()
-}
-
-function subscriptionUpdateUI() {
-	if("mocked" in subscription) return false
-	
-	$(".notification-subscribe").removeClass("d-none")
-	$(".notification-unsubscribe").addClass("d-none")
-	
-	let modified = false
-	for(const [category, labelList] of Object.entries(subscription)) {
-		if(!Array.isArray(labelList)) continue
-		
-		for(const subLabel of labelList) {
-			const picker = $('*[data-subscription-type="'+category+'"][data-subscription-label="'+subLabel+'"]')
-			//console.log("picker", '*[data-subscription-type="'+category+'"][data-subscription-label="'+subLabel+'"]', picker)
-			if(!picker.length) continue
-			
-			modified = true
-			$(".notification-subscribe", picker).addClass("d-none")
-			$(".notification-unsubscribe", picker).removeClass("d-none")
-		}
-	}
-	
-	return modified
-}
-
-function subscriptionUpdateUIWait(resolve, reject, i) {
-	if(typeof reject != 'function') reject = (str) => console.error(str)
-	if(Notification.permission != "granted" && typeof i == 'undefined') return reject("No permission")
-	
-	if(typeof i == 'undefined') i = 5
-	if(i !== false && i <= 0) return reject("Timeout on subscriptionUpdateUIWait")
-	
-	if("mocked" in subscription) {
-		return setTimeout(() => {
-			subscriptionUpdateUIWait(resolve, reject, i !== false ? i-1 : false)
-		}, 500)
-	}
-	
-	subscriptionUpdateUI()
-	resolve()
-}
 
 function sortBySubscription(containerSelector, childSelector, func) {
 	subscriptionUpdateUIWait(() => {
 		$(containerSelector).each(function() {
+			if(!$(".notification-unsubscribe", this).is(':visible')) return true // continue
+			
 			const childs = $(this).children(childSelector).sort((a, b) => {
 				const aIsSubbed = $(".notification-unsubscribe", a).is(':visible')
 				const bIsSubbed = $(".notification-unsubscribe", b).is(':visible')
@@ -153,7 +21,7 @@ function sortBySubscription(containerSelector, childSelector, func) {
 				if(aIsSubbed != bIsSubbed) {
 					return aIsSubbed ? -1 : 1
 				} else {
-					return b.textContent < a.textContent
+					return 0 // dont move, as sorting was done beforehand
 				}
 			})
 			$(this).append(childs)
@@ -210,13 +78,12 @@ function getMatchItem(matchData) {
 		.attr("data-subscription-type", "matches").attr("data-subscription-label", matchData.id)
 	
 	const date = matchData.date.toDate()
-	$(".card-header .left-info", thisMatchItem).html(matchData.stage + "<br>" + dateFormat(date))
+	$(".card-header .left-info .stage-name", thisMatchItem).text(matchData.stage)
+	$(".card-header .left-info .event-date", thisMatchItem).text(dateFormat(date))
+	$(".card-header .right-info .status-label", thisMatchItem).text(statusLookup[matchData.status].toUpperCase())
 	
-	let timeDiff = get_time_diff(date)
-	if(matchData.status == 1) timeDiff = '<i class="fa-solid fa-circle"></i>'
-	else if(matchData.status == 2) timeDiff = timeDiff + " AGO"
-	else timeDiff = "IN " + timeDiff
-	$(".card-header .right-info", thisMatchItem).html(statusLookup[matchData.status].toUpperCase() + "<br>" + timeDiff)
+	let timeDiff = get_time_diff_label(matchData.status, date)
+	$(".card-header .right-info .event-date-diff", thisMatchItem).html(timeDiff).attr("data-timestamp", date.getTime()).attr("data-status", matchData.status)
 	
 	$('.team-side[data-team=0] .team-name', thisMatchItem).text(matchData.team1)
 	let score1 = "map1" in matchData ? matchData.map1 : "-"
@@ -230,6 +97,18 @@ function getMatchItem(matchData) {
 	
 	return thisMatchItem
 }
+
+// Update relative time
+setInterval(function() {
+	let tmpDate, tmpStatus
+	$(".card-header .right-info .event-date-diff").not("[data-status=1]").each(function() {
+		tmpStatus = parseInt($(this).attr("data-status"))
+		tmpDate = new Date(parseInt($(this).attr("data-timestamp")))
+		
+		let timeDiff = get_time_diff_label(tmpStatus, tmpDate)
+		$(this).html(timeDiff)
+	})
+}, 1000)
 
 function syncNewSubscriptions() {
 	subscription._updated = new Date()
@@ -252,6 +131,13 @@ function removeItemOnce(arr, value) {
     arr.splice(index, 1);
   }
   return arr;
+}
+
+function get_time_diff_label(matchStatus, dateTime) {
+	let timeDiff = get_time_diff(dateTime)
+	if(matchStatus == 1) return '<i class="fa-solid fa-circle"></i>'
+	else if(matchStatus == 2) return timeDiff + " AGO"
+	else return "IN " + timeDiff
 }
 
 // https://stackoverflow.com/a/18103175/1424378

@@ -15,6 +15,7 @@
 		<script src="https://www.gstatic.com/firebasejs/9.6.7/firebase-firestore-compat.js" integrity="sha512-fjpDcxlhomr0JOBFHhY70l0nP543wcWAoqyZinZ5sf/RgTSkiqRwf5UGP1X3A24tBpMXdkDRMjbap3TFCMcmeg==" crossorigin="anonymous" defer></script>
 		
 		<script src="/scripts/firebase.js" defer></script>
+		<script src="/scripts/notifications.js" defer></script>
 		<script src="/scripts/ui.js" defer></script>
 		
 		<link rel="stylesheet" href="/css/bootstrap.min.css">
@@ -70,8 +71,14 @@
 				<div class="card">
 					<div class="card-header">
 						<div class="row">
-							<div class="col-6 left-info"></div> 
-							<div class="col-6 text-right right-info"></div>
+							<div class="col-8 left-info">
+								<p class="stage-name"></p>
+								<p class="event-date"></p>
+							</div> 
+							<div class="col-4 text-right right-info">
+								<p class="status-label"></p>
+								<p class="event-date-diff"></p>
+							</div>
 						</div>
 					</div>
 					
