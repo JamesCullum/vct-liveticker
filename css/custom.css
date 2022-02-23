@@ -18,6 +18,10 @@
 	border-color: var(--bs-secondary);
 }
 
+.dropdown-item:focus, .dropdown-item:hover {
+	background-color: var(--bs-secondary);
+}
+
 body {
 	padding-top: 100px;
 }

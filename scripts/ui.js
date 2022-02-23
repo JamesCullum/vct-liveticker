@@ -74,7 +74,8 @@ $("body").on("click", ".expand-items", function(evt) {
 	if(!hasMore) $(this).remove()
 })
 
-function getMatchItem(matchData) {
+function getMatchItem(matchData, opts) {
+	if(typeof opts == 'undefined') opts = {}
 	const thisMatchItem = $("#template-elements > .match-item").clone()
 	
 	//$(".card", thisMatchItem).addClass("bg-"+statusCardClassLookup[matchData.status])
@@ -82,7 +83,7 @@ function getMatchItem(matchData) {
 		.attr("data-subscription-type", "matches").attr("data-subscription-label", matchData.id)
 	
 	const date = matchData.date.toDate()
-	$(".card-header .left-info .stage-name", thisMatchItem).text(matchData.stage)
+	$(".card-header .left-info .stage-name", thisMatchItem).text(opts.eventTitle ? matchData.event : matchData.stage)
 	$(".card-header .left-info .event-date", thisMatchItem).text(dateFormat(date))
 	$(".card-header .right-info .status-label", thisMatchItem).text(statusLookup[matchData.status].toUpperCase())
 	
@@ -143,7 +144,7 @@ function get_time_diff_label(matchStatus, dateTime) {
 }
 
 // https://stackoverflow.com/a/18103175/1424378
-function get_time_diff( datetime )
+function get_time_diff(datetime)
 {
     var datetime = new Date( datetime ).getTime();
     var now = new Date().getTime();

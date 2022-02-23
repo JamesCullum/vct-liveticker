@@ -3,7 +3,7 @@
 if (Notification.permission == "granted") {
 	initNotificationProfile().then(() => {})
 } else if(!localStorage.getItem("disabled-notification-hint")) {
-	$("body > .container").prepend(`<div class="alert alert-dismissible alert-info mb-4" id="notification-start-hint">
+	$(".body-container").prepend(`<div class="alert alert-dismissible alert-info mb-4" id="notification-start-hint">
 		<button type="button" class="btn-close" data-bs-dismiss="alert" id="disabled-notification-hint"></button>
 		If you want to receive push notifications or live updates, please enable notifications.<br>
 		<button type="button" class="btn btn-light enable-notifications">Start receiving updates</button>
@@ -64,7 +64,7 @@ async function initNotificationProfile() {
 		msgToken = await messaging.getToken({vapidKey: "BHsrbLQQiNSDUQzw6EgeO-45Arty5Pct9lDQWevJpsL2bzts_o0BZL7MmZt7lDcoFjd2mSumps5UByzBaboPCxU"})
 	} catch(error) {
 		console.error(error)
-		$("body > .container").prepend(`<div class="alert alert-danger mb-4">
+		$(".body-container").prepend(`<div class="alert alert-danger mb-4">
 			Firebase failed to connect to the messaging API.<br>
 			This can be caused by missing notification permissions, network connectivity issues, browser incompatibility or an adblocker.
 			<br><br>

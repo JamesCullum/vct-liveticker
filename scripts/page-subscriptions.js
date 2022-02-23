@@ -1,7 +1,7 @@
 
 if(Notification.permission != "granted") {
 	if(!$("#notification-start-hint").length) {
-		$("body > .container").append(`<div class="alert alert-danger mb-4">
+		$(".body-container").append(`<div class="alert alert-danger mb-4">
 			Subscriptions are tied to the notification profile of your browser.
 			Currently you have denied notification permission, which means we cannot identify your browser.<br>
 			<button type="button" class="btn btn-light enable-notifications">Sign In</button>
@@ -12,7 +12,7 @@ if(Notification.permission != "granted") {
 subscriptionUpdateUIWait(() => {
 	$("#loader").remove()
 	
-	$("body > .container").append(`
+	$(".body-container").append(`
 		<form id="subscription-form">
 			<fieldset>
 				<legend>Manage Subscription</legend>

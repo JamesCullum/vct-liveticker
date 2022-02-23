@@ -62,12 +62,27 @@
 		  </div>
 		</div>
 	
-		<div class="container">
+		<div class="container body-container">
 			<div id="event-list">
 				<div class="lds-ellipsis" id="loader"><div></div><div></div><div></div><div></div></div>
 			</div>
 		</div>
 		<div id="template-elements">
+			<div class="row mb-4 match-list-item expand-container">
+				<div class="col-12">
+					<h2 class="match-list-title"></h2>
+				</div>
+				<div class="col-12">
+					<div class="row match-list-container"></div>
+				</div>
+				<div class="col-12 pagination-bar d-none">
+					<div class="d-grid gap-2">
+						<div class="btn-group" role="group">
+							<button class="btn btn-lg btn-primary pagination-forward" type="button">Load more</button>
+						</div>
+					</div>
+				</div>
+			</div>
 			<div class="row mb-4 event-item expand-container">
 				<div class="col-12 event-container">
 					<h2 class="notification-subscribe">
