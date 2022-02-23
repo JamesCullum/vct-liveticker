@@ -114,13 +114,6 @@ setInterval(function() {
 	})
 }, 1000)
 
-function syncNewSubscriptions() {
-	subscription._updated = new Date()
-	subscription._synced = false
-	
-	return ownSubRef.set(subscription)
-}
-
 function dateFormat(dateObj) {
 	return dateObj.toLocaleString(navigator.language || navigator.userLanguage, {
 		timeZone: Intl.DateTimeFormat().resolvedOptions().timeZone,

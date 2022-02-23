@@ -51,6 +51,8 @@ $("body").on("click", ".notification-subscribe, .notification-unsubscribe", asyn
 	}
 	syncNewSubscriptions().then(() => {
 		console.log("updated subscription", subscription)
+	}).catch(error => {
+		alert("Subscription failed: "+error.message)
 	})
 	
 	subscriptionUpdateUI()
@@ -87,6 +89,13 @@ async function initNotificationProfile() {
 	console.log("Subscriptions: ", subscription)
 	
 	subscriptionUpdateUI()
+}
+
+function syncNewSubscriptions() {
+	subscription._updated = new Date()
+	subscription._synced = false
+	
+	return ownSubRef.set(subscription)
 }
 
 function subscriptionUpdateUI() {
