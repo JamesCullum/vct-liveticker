@@ -160,9 +160,9 @@ function get_time_diff( datetime )
     var date_diff = new Date(milisec_diff);
 
 	let finalStr = ""
-	if(days > 0) return days + " DAYS"
-	if(date_diff.getHours() > 0) finalStr += date_diff.getHours() + "H "
-	if(date_diff.getMinutes() > 0) finalStr += date_diff.getMinutes() + "M "
-	if(date_diff.getHours() == 0 && date_diff.getSeconds() > 0) finalStr += date_diff.getSeconds() + "S "
+	if(days > 0) return days + "D"
+	if(date_diff.getHours() > 0) return date_diff.getHours() + "H"
+	if(date_diff.getMinutes() > 0) return date_diff.getMinutes() + "M"
+	if(date_diff.getHours() == 0 && date_diff.getSeconds() > 0) return date_diff.getSeconds() + "S"
     return finalStr
 }
