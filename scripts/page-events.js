@@ -1,7 +1,16 @@
 
 db.collection("events").doc("current").onSnapshot(doc => {
-	const events = Object.entries(doc.data());
+	const docData = doc.data()
+	delete docData._updated
+	
+	const events = Object.entries(docData);
 	$("#event-list").html("")
+	
+	console.log("got snapshot", events)
+	events.sort((a, b) => {
+		return b[0] < a[0];
+	})
+	console.log("after sort", events)
 	
 	if(!events.length) {
 		return $("#event-list").append(`<div class="alert alert-primary alert-downtime">
@@ -11,8 +20,6 @@ db.collection("events").doc("current").onSnapshot(doc => {
 	}
 	
 	for (let [name, matchInventory] of events) {
-		if(name == "_updated") continue
-		
 		const thisEventItem = $("#template-elements > .event-item").clone()
 		$(".event-container", thisEventItem).attr("data-subscription-type", "events").attr("data-subscription-label", name)
 		$(".event-name", thisEventItem).text(name)
