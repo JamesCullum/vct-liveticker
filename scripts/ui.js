@@ -13,14 +13,14 @@ document.head.appendChild(pageScript)
 
 
 // Methods
-function sortBySubscription(containerSelector, childSelector, func) {
+function sortBySubscription(containerSelector, childSelector, childSubSelector, func) {
 	subscriptionUpdateUIWait(() => {
 		$(containerSelector).each(function() {
 			if(!$(".notification-unsubscribe", this).is(':visible')) return true // continue
 			
 			const childs = $(this).children(childSelector).sort((a, b) => {
-				const aIsSubbed = $(".notification-unsubscribe", a).is(':visible')
-				const bIsSubbed = $(".notification-unsubscribe", b).is(':visible')
+				const aIsSubbed = $(childSubSelector, a).find(".notification-unsubscribe").is(':visible')
+				const bIsSubbed = $(childSubSelector, b).find(".notification-unsubscribe").is(':visible')
 				
 				if(aIsSubbed != bIsSubbed) {
 					return aIsSubbed ? -1 : 1

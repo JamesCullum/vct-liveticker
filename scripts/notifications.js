@@ -111,9 +111,9 @@ function subscriptionUpdateUI() {
 		if(!Array.isArray(labelList)) continue
 		
 		for(const subLabel of labelList) {
-			const picker = $('*[data-subscription-type="'+category+'"][data-subscription-label="'+subLabel+'"]')
-			//console.log("picker", '*[data-subscription-type="'+category+'"][data-subscription-label="'+subLabel+'"]', picker)
+			let picker = $('div[data-subscription-type="'+category+'"][data-subscription-label="'+subLabel+'"]')
 			if(!picker.length) continue
+			if(category == "events") picker = $(".event-title-bar, .sub-bottom", picker) // make sure we dont select match items
 			
 			modified = true
 			$(".notification-subscribe", picker).addClass("d-none")

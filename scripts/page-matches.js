@@ -63,7 +63,7 @@ function loadMatchPage(moveForward) {
 			loadBtn.removeClass("d-none")
 		}
 		
-		sortBySubscription(".match-list-container", ".match-item")
+		sortBySubscription(".match-list-container", ".match-item", ".card-footer")
 	})
 }
 

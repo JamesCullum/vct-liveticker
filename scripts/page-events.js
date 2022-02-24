@@ -10,10 +10,6 @@ db.collection("events").doc("current").onSnapshot(doc => {
 		</div>`)
 	}
 	
-	events.sort(([aName, aVal], [bName, bVal]) => {
-		return bName < aName;
-	})
-	
 	for (let [name, matchInventory] of events) {
 		if(name == "_updated") continue
 		
@@ -43,15 +39,16 @@ db.collection("events").doc("current").onSnapshot(doc => {
 		
 		for (let matchData of matchDataList) {		
 			const thisMatchItem = getMatchItem(matchData)
-			thisEventItem.append(thisMatchItem)
+			$(".match-list-container", thisEventItem).append(thisMatchItem)
 		}
 		
 		$("#event-list").append(thisEventItem)
 	}
 	
-	sortBySubscription("#event-list", ".event-item")
-	sortBySubscription(".event-item", ".match-item", () => {
-		limitExpandItems(".event-item", ".match-item", 3)
+	sortBySubscription("#event-list", ".event-item", ".event-title-bar", () => {
+		sortBySubscription("#event-list .match-list-container", ".match-item", ".card-footer", () => {
+			limitExpandItems("#event-list .match-list-container", ".match-item", 3)
+		})
 	})
 	
 })
