@@ -28,8 +28,8 @@ db.collection("events").doc("current").onSnapshot(doc => {
 		if(1 in matchInventory) matchDataList.push(...matchInventory[1])
 			
 		const notLiveEvents = []
-		if(2 in matchInventory) notLiveEvents.push(...matchInventory[2])
 		if(0 in matchInventory) notLiveEvents.push(...matchInventory[0])
+		if(2 in matchInventory) notLiveEvents.push(...matchInventory[2])
 		
 		const now = new Date()
 		notLiveEvents.sort((a, b) => {
