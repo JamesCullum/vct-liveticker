@@ -124,8 +124,6 @@ function applyFilters() {
 		const label = $(this).text()
 		if(filterContains(label)) $(this).removeClass("btn-secondary").addClass("btn-primary")
 	})
-
-	if("
 }
 
 
