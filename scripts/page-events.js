@@ -52,6 +52,17 @@ db.collection("events").doc("current").onSnapshot(doc => {
 		$("#event-list").append(thisEventItem)
 	}
 	
+	// Filter, based on results from Champions 21
+	// https://liquipedia.net/valorant/VALORANT_Champions_Tour/2021/Champions
+	$("#event-list").prepend(`<div class="row"><div class="event-filter-list mb-2"></div></div>`)
+	const filterList = ["EMEA", "Latin America", "Philippines", "North America", "Thailand", "Brazil", "Korea", "Japan"]
+	for(const filterVal of filterList) {
+		$(".event-filter-list").append(`<button type="button" class="btn btn-secondary btn-sm">`+filterVal+`</button>`)
+	}
+	
+	loadFilters()
+	applyFilters()
+	
 	sortBySubscription("#event-list", ".event-item", ".event-title-bar", () => {
 		sortBySubscription("#event-list .match-list-container", ".match-item", ".card-footer", () => {
 			limitExpandItems("#event-list .match-list-container", ".match-item", 3)
@@ -59,4 +70,63 @@ db.collection("events").doc("current").onSnapshot(doc => {
 	})
 	
 })
+
+$("body").on("click", ".event-filter-list .btn", function(evt) {
+	const label = $(this).text()
+	
+	if($(this).hasClass("btn-primary")) {
+		filters = removeItemOnce(filters, label)
+	} else {
+		filters.push(label)
+	}
+	
+	applyFilters()
+	saveFilters()
+})
+
+window.filters = []
+window.filtersLoaded = false
+function loadFilters() {
+	if(filtersLoaded) return true
+	filtersLoaded = true
+	
+	if(localStorage.getItem("evt-filters")) {
+		filters = JSON.parse(localStorage.getItem("evt-filters"))
+	}
+}
+
+function saveFilters() {
+	localStorage.setItem("evt-filters", JSON.stringify(filters))
+}
+
+function filterContains(label) {
+	if(!label) return false
+	
+	for(const filterVal of filters) {
+		if(label.indexOf(filterVal) != -1) return true
+	}
+	return false
+}
+
+function applyFilters() {
+	const evtSel = $('.event-item')
+	const btnSel = $(".event-filter-list .btn")
+	
+	evtSel.removeClass("d-none")
+	btnSel.removeClass("btn-primary").addClass("btn-secondary")
+	if(!filters.length) return true
+	
+	evtSel.each(function() {
+		const label = $(".event-container", this).attr("data-subscription-label")
+		if(!filterContains(label)) $(this).addClass("d-none")
+	})
+	btnSel.each(function() {
+		const label = $(this).text()
+		if(filterContains(label)) $(this).removeClass("btn-secondary").addClass("btn-primary")
+	})
+
+	if("
+}
+
+
 
