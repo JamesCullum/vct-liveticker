@@ -8,7 +8,7 @@ db.collection("events").doc("current").onSnapshot(doc => {
 	
 	console.log("got snapshot", events)
 	events.sort((a, b) => {
-		return b[0] < a[0];
+		return b[0] < a[0] ? 1 : -1;
 	})
 	console.log("after sort", events)
 	
@@ -35,7 +35,7 @@ db.collection("events").doc("current").onSnapshot(doc => {
 		notLiveEvents.sort((a, b) => {
 			const aDateDiff = Math.abs(now - a.date.toDate())
 			const bDateDiff = Math.abs(now - b.date.toDate())
-			return aDateDiff > bDateDiff
+			return aDateDiff > bDateDiff ? 1 : -1
 		})
 		matchDataList.push(...notLiveEvents)
 		

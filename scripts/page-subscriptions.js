@@ -65,7 +65,7 @@ subscriptionUpdateUIWait(() => {
 		$(".sub-clear-events").removeAttr("disabled")
 		
 		subscription.events.sort((a, b) => {
-			return b < a
+			return b < a ? 1 : -1
 		})
 		for(const eventName of subscription.events) {
 			const opt = document.createElement("option");
