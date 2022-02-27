@@ -6,11 +6,9 @@ db.collection("events").doc("current").onSnapshot(doc => {
 	const events = Object.entries(docData);
 	$("#event-list").html("")
 	
-	console.log("got snapshot", events)
 	events.sort((a, b) => {
 		return b[0] < a[0] ? 1 : -1;
 	})
-	console.log("after sort", events)
 	
 	if(!events.length) {
 		return $("#event-list").append(`<div class="alert alert-primary alert-downtime">
