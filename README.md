@@ -14,7 +14,9 @@ allowing you to track current matches of the [Valorant Champions Tour](https://w
 * **Optimized for mobile:** Smooth experience on the phone and smaller screens, very little data usage needed.
 
 **How to contribute**
+
 [![Open in Gitpod](https://gitpod.io/button/open-in-gitpod.svg)](https://gitpod.io/#https://github.com/JamesCullum/vct-liveticker)
+
 This frontend consists of static HTML and javascript pages using Firebase for messaging and database.
 
 *Pull requests are more than welcome.*
