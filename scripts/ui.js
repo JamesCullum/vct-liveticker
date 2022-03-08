@@ -139,17 +139,39 @@ function get_time_diff_label(matchStatus, dateTime) {
 		return timeDiff + " AGO"
 	} else {
 		let now = new Date()
-		return now < dateTime ? "IN " + timeDiff : "Starting..."
+		return now < dateTime ? "IN " + timeDiff : "STARTING..."
 	}
 }
 
-// https://stackoverflow.com/a/18103175/1424378
+//https://stackoverflow.com/a/1788084/1424378
 function get_time_diff(datetime)
 {
+	var now = new Date()
+	var diff = Math.abs(datetime - now)
+	
+	var msec = diff;
+	var dd = Math.floor(msec / 1000 / 60 / (60*24));
+	if(dd > 0) return dd + "D";
+	msec -= hh * 1000 * 60 * (60*24);
+	
+	var hh = Math.floor(msec / 1000 / 60 / 60);
+	if(hh > 0) return hh + "H";
+	msec -= hh * 1000 * 60 * 60;
+	
+	var mm = Math.floor(msec / 1000 / 60);
+	if(mm > 0) return mm + "M";
+	msec -= mm * 1000 * 60;
+	
+	var ss = Math.floor(msec / 1000);
+	msec -= ss * 1000;
+	if(msec > 0) return msec + "S";
+	
+	/*
+	// https://stackoverflow.com/a/18103175/1424378
     var datetime = new Date( datetime ).getTime();
     var now = new Date().getTime();
 
-    if( isNaN(datetime) ) return "";
+    if(isNaN(datetime)) return "";
 
     if (datetime < now) {
         var milisec_diff = now - datetime;
@@ -166,4 +188,5 @@ function get_time_diff(datetime)
 	if(date_diff.getMinutes() > 0) return date_diff.getMinutes() + "M"
 	if(date_diff.getHours() == 0 && date_diff.getSeconds() > 0) return date_diff.getSeconds() + "S"
     return finalStr
+	*/
 }
