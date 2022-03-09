@@ -165,28 +165,4 @@ function get_time_diff(datetime)
 	var ss = Math.floor(msec / 1000);
 	msec -= ss * 1000;
 	if(msec > 0) return msec + "S";
-	
-	/*
-	// https://stackoverflow.com/a/18103175/1424378
-    var datetime = new Date( datetime ).getTime();
-    var now = new Date().getTime();
-
-    if(isNaN(datetime)) return "";
-
-    if (datetime < now) {
-        var milisec_diff = now - datetime;
-    }else{
-        var milisec_diff = datetime - now;
-    }
-
-    var days = Math.floor(milisec_diff / 1000 / 60 / (60 * 24));
-    var date_diff = new Date(milisec_diff);
-
-	let finalStr = ""
-	if(days > 0) return days + "D"
-	if(date_diff.getHours() > 0) return date_diff.getHours() + "H"
-	if(date_diff.getMinutes() > 0) return date_diff.getMinutes() + "M"
-	if(date_diff.getHours() == 0 && date_diff.getSeconds() > 0) return date_diff.getSeconds() + "S"
-    return finalStr
-	*/
 }

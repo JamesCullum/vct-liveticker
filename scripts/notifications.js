@@ -5,21 +5,21 @@ const supportsNotification = ('Notification' in window)
 if(!supportsNotification) {
 	var hideSubscribe = $('<style>.sub-right, .sub-bottom, .match-list-container .card-footer, #menu-profile { display: none !important; }</style>');
 	$('html > head').append(hideSubscribe)
-}
-
-if (Notification.permission == "granted" && supportsNotification) {
-	initNotificationProfile().then(() => {})
-} else if(!localStorage.getItem("disabled-unsupported-device") && !supportsNotification) {
-	$(".body-container").prepend(`<div class="alert alert-dismissible alert-danger mb-4" id="notification-unsupported-start-hint">
-		<button type="button" class="btn-close" data-bs-dismiss="alert" id="notification-unsupported-hint"></button>
-		The device or browser you are using does not support the <a href="https://caniuse.com/push-api" target="_blank" rel="noopener noreferrer">Web Push API</a>.
-		Push notifications are not available, but you can still use this web application to stay up-to-date.
-		Even though you won't get a notification, match information will automatically refresh and you can filter the regions and matches of your choice.
-	</div>`)
 	
-	$("#notification-unsupported-hint").click(function(evt) {
-		localStorage.setItem("disabled-unsupported-device", "1")
-	})
+	if(!localStorage.getItem("disabled-unsupported-device")) {
+		$(".body-container").prepend(`<div class="alert alert-dismissible alert-danger mb-4" id="notification-unsupported-start-hint">
+			<button type="button" class="btn-close" data-bs-dismiss="alert" id="notification-unsupported-hint"></button>
+			The device or browser you are using does not support the <a href="https://caniuse.com/push-api" target="_blank" rel="noopener noreferrer">Web Push API</a>.
+			Push notifications are not available, but you can still use this web application to stay up-to-date.
+			Even though you won't get a notification, match information will automatically refresh and you can filter the regions and matches of your choice.
+		</div>`)
+		
+		$("#notification-unsupported-hint").click(function(evt) {
+			localStorage.setItem("disabled-unsupported-device", "1")
+		})
+	}
+} else if (Notification.permission == "granted" && supportsNotification) {
+	initNotificationProfile().then(() => {})
 } else if(!localStorage.getItem("disabled-notification-hint")) {
 	$(".body-container").prepend(`<div class="alert alert-dismissible alert-info mb-4" id="notification-start-hint">
 		<button type="button" class="btn-close" data-bs-dismiss="alert" id="disabled-notification-hint"></button>

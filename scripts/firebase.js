@@ -12,9 +12,9 @@ const app = firebase.initializeApp(firebaseConfig);
 const appCheck = firebase.appCheck();
 appCheck.activate('6LeIsXYeAAAAAObgcWGuMGqLdNvp86fVIrlhcg1x', true);
 
+const db = firebase.firestore();
+
 const messaging = firebase.messaging();
 /*messaging.onMessage(payload => {
 	console.log("Message received. ", payload);
 });*/
-
-const db = firebase.firestore();
