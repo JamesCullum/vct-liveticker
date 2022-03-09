@@ -104,10 +104,12 @@ function getMatchItem(matchData, opts) {
 }
 // Update relative time every second
 setInterval(function() {
-	let tmpDate, tmpStatus
+	let tmpDate, tmpStatus, timestampRaw
 	$(".card-header .right-info .event-date-diff").not("[data-status=1]").each(function() {
 		tmpStatus = parseInt($(this).attr("data-status"))
-		tmpDate = new Date(parseInt($(this).attr("data-timestamp")))
+		timestampRaw = parseInt($(this).attr("data-timestamp"))
+		if(!timestampRaw) return true
+		tmpDate = new Date(timestampRaw)
 		
 		let timeDiff = get_time_diff_label(tmpStatus, tmpDate)
 		$(this).html(timeDiff)
@@ -123,11 +125,11 @@ function dateFormat(dateObj) {
 
 // https://stackoverflow.com/a/5767357/1424378
 function removeItemOnce(arr, value) {
-  var index = arr.indexOf(value);
-  if (index > -1) {
-    arr.splice(index, 1);
-  }
-  return arr;
+	var index = arr.indexOf(value);
+	if (index > -1) {
+		arr.splice(index, 1);
+	}
+	return arr;
 }
 
 function get_time_diff_label(matchStatus, dateTime) {
@@ -144,25 +146,23 @@ function get_time_diff_label(matchStatus, dateTime) {
 }
 
 //https://stackoverflow.com/a/1788084/1424378
-function get_time_diff(datetime)
+function get_time_diff(dateTime)
 {
 	var now = new Date()
-	var diff = Math.abs(datetime - now)
+	var diff = Math.abs(dateTime - now)
 	
 	var msec = diff;
 	var dd = Math.floor(msec / 1000 / 60 / (60*24));
 	if(dd > 0) return dd + "D";
-	msec -= hh * 1000 * 60 * (60*24);
 	
 	var hh = Math.floor(msec / 1000 / 60 / 60);
 	if(hh > 0) return hh + "H";
-	msec -= hh * 1000 * 60 * 60;
 	
 	var mm = Math.floor(msec / 1000 / 60);
 	if(mm > 0) return mm + "M";
-	msec -= mm * 1000 * 60;
 	
 	var ss = Math.floor(msec / 1000);
-	msec -= ss * 1000;
 	if(msec > 0) return msec + "S";
+	
+	return "NOW";
 }
