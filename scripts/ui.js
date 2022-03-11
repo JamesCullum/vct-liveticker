@@ -136,7 +136,7 @@ function get_time_diff_label(matchStatus, dateTime) {
 	let timeDiff = get_time_diff(dateTime)
 	
 	if(matchStatus == 1) {
-		return '<i class="fa-solid fa-circle"></i>'
+		return '<svg class="icon icon-circle"><use xlink:href="#icon-circle"></use></svg>'
 	} else if(matchStatus == 2) {
 		return timeDiff + " AGO"
 	} else {

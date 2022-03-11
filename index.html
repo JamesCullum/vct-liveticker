@@ -20,7 +20,6 @@
 		<title>VCT Ticker</title>
 		
 		<script src="https://cdnjs.cloudflare.com/ajax/libs/jquery/3.6.0/jquery.min.js" integrity="sha512-894YE6QWD5I59HgZOGReFYm4dnWc1Qt5NtvYSaNcOP+u1T9qYdvdihz0PPSiiqn/+/3e7Jo4EaG7TubfWGUrMQ==" crossorigin="anonymous" referrerpolicy="no-referrer" defer></script>
-		<script src="https://kit.fontawesome.com/447036a036.js" crossorigin="anonymous" async></script>
 		<script src="/scripts/bootstrap.bundle.min.js" async></script>
 		
 		<script src="https://www.gstatic.com/firebasejs/9.6.7/firebase-app-compat.js" integrity="sha512-1ASnheR1wlUtao9fk3hwfLQT6MYWOGdUoqakokpwdXaX75duCnJhMZEJDCBUbvFIC0Ap6PViaeK+f10x/zQfRg==" crossorigin="anonymous" defer></script>
@@ -68,7 +67,7 @@
 			  </ul>
 			  <ul class="navbar-nav ms-md-auto">
 				<li class="nav-item" id="menu-profile">
-				  <a href="#" class="nav-link sign-in"><i class="fa-solid fa-user"></i> Sign In</a>
+				  <a href="#" class="nav-link sign-in"><svg class="icon icon-user"><use xlink:href="#icon-user"></use></svg> Sign In</a>
 				</li>
 			  </ul>
 			</div>
@@ -100,16 +99,16 @@
 						<div class="row">
 							<h2 class="col-lg-8"><span class="event-name"></span></h2>
 							<div class="col-lg-4 text-right d-none d-lg-block sub-right">
-								<button type="button" class="btn btn-primary btn-lg notification-subscribe"><i class="fa-solid fa-bell"></i> Subscribe to event updates</button>
-								<button type="button" class="btn btn-secondary btn-lg notification-unsubscribe d-none"><i class="fa-solid fa-bell-slash"></i> Unsubscribe from event updates</button>
+								<button type="button" class="btn btn-primary btn-lg notification-subscribe"><svg class="icon icon-bell"><use xlink:href="#icon-bell"></use></svg> Subscribe to event updates</button>
+								<button type="button" class="btn btn-secondary btn-lg notification-unsubscribe d-none"><svg class="icon icon-bell-slash"><use xlink:href="#icon-bell-slash"></use></svg> Unsubscribe from event updates</button>
 							</div>
 						</div>
 					</div>
 					<div class="row match-list-container expand-container"></div>
 					<div class="sub-bottom mt-2 d-lg-none">
 						<div class="d-grid gap-2">
-							<button type="button" class="btn btn-primary btn-lg notification-subscribe"><i class="fa-solid fa-bell"></i> Subscribe to event updates</button>
-							<button type="button" class="btn btn-secondary btn-lg notification-unsubscribe d-none"><i class="fa-solid fa-bell-slash"></i> Unsubscribe from event updates</button>
+							<button type="button" class="btn btn-primary btn-lg notification-subscribe"><svg class="icon icon-bell"><use xlink:href="#icon-bell"></use></svg> Subscribe to event updates</button>
+							<button type="button" class="btn btn-secondary btn-lg notification-unsubscribe d-none"><svg class="icon icon-bell-slash"><use xlink:href="#icon-bell-slash"></use></svg> Unsubscribe from event updates</button>
 						</div>
 					</div>
 				</div>
@@ -145,10 +144,10 @@
 					<div class="card-footer">
 						<div class="row">
 							<div class="notification-subscribe">
-								<button type="button" class="btn btn-sm"><i class="fa-solid fa-bell"></i> Subscribe to match updates</button>
+								<button type="button" class="btn btn-sm"><svg class="icon icon-bell"><use xlink:href="#icon-bell"></use></svg> Subscribe to match updates</button>
 							</div>
 							<div class="notification-unsubscribe d-none">
-								<button type="button" class="btn btn-sm"><i class="fa-solid fa-bell-slash"></i> Unsubscribe from match updates</button>
+								<button type="button" class="btn btn-sm"><svg class="icon icon-bell-slash"><use xlink:href="#icon-bell-slash"></use></svg> Unsubscribe from match updates</button>
 							</div>
 						</div>
 					</div>
@@ -160,5 +159,23 @@
 		<script src="https://cdnjs.cloudflare.com/ajax/libs/eruda/2.4.1/eruda.min.js" integrity="sha512-RrQDQUon0OiQVjKQYkMuhtLgx8R/4niagIVdHltxcAJa1+cc8FJFFOhtLuK3YJAoo5mdfAFh98ZQwbDKJgFIpg==" crossorigin="anonymous" referrerpolicy="no-referrer"></script>
 		<script>eruda.init();</script>
 		-->
+		
+		<!-- Icons -->
+		<svg aria-hidden="true" style="position: absolute; width: 0; height: 0; overflow: hidden;" version="1.1" xmlns="http://www.w3.org/2000/svg" xmlns:xlink="http://www.w3.org/1999/xlink">
+		<defs>
+		<symbol id="icon-user" viewBox="0 0 20 28">
+		<path d="M20 21.859c0 2.281-1.5 4.141-3.328 4.141h-13.344c-1.828 0-3.328-1.859-3.328-4.141 0-4.109 1.016-8.859 5.109-8.859 1.266 1.234 2.984 2 4.891 2s3.625-0.766 4.891-2c4.094 0 5.109 4.75 5.109 8.859zM16 8c0 3.313-2.688 6-6 6s-6-2.688-6-6 2.688-6 6-6 6 2.688 6 6z"></path>
+		</symbol>
+		<symbol id="icon-bell" viewBox="0 0 28 28">
+		<path d="M14.25 26.5c0-0.141-0.109-0.25-0.25-0.25-1.234 0-2.25-1.016-2.25-2.25 0-0.141-0.109-0.25-0.25-0.25s-0.25 0.109-0.25 0.25c0 1.516 1.234 2.75 2.75 2.75 0.141 0 0.25-0.109 0.25-0.25zM27 22c0 1.094-0.906 2-2 2h-7c0 2.203-1.797 4-4 4s-4-1.797-4-4h-7c-1.094 0-2-0.906-2-2 2.312-1.953 5-5.453 5-13 0-3 2.484-6.281 6.625-6.891-0.078-0.187-0.125-0.391-0.125-0.609 0-0.828 0.672-1.5 1.5-1.5s1.5 0.672 1.5 1.5c0 0.219-0.047 0.422-0.125 0.609 4.141 0.609 6.625 3.891 6.625 6.891 0 7.547 2.688 11.047 5 13z"></path>
+		</symbol>
+		<symbol id="icon-circle" viewBox="0 0 24 28">
+		<path d="M24 14c0 6.625-5.375 12-12 12s-12-5.375-12-12 5.375-12 12-12 12 5.375 12 12z"></path>
+		</symbol>
+		<symbol id="icon-bell-slash" viewBox="0 0 32 28">
+		<path d="M24.344 13.312c0.797 4.656 2.844 7.156 4.656 8.687 0 1.094-0.906 2-2 2h-7c0 2.203-1.797 4-4 4s-3.984-1.781-4-3.984zM16 26.75c0.141 0 0.25-0.109 0.25-0.25s-0.109-0.25-0.25-0.25c-1.234 0-2.25-1.016-2.25-2.25 0-0.141-0.109-0.25-0.25-0.25s-0.25 0.109-0.25 0.25c0 1.516 1.234 2.75 2.75 2.75zM31.656 1.75c0.172 0.219 0.156 0.531-0.047 0.719l-29.25 25.344c-0.203 0.172-0.531 0.156-0.703-0.063l-1.313-1.5c-0.172-0.219-0.156-0.531 0.047-0.703l2.906-2.516c-0.187-0.313-0.297-0.656-0.297-1.031 2.312-1.953 5-5.453 5-13 0-3 2.484-6.281 6.625-6.891-0.078-0.187-0.125-0.391-0.125-0.609 0-0.828 0.672-1.5 1.5-1.5s1.5 0.672 1.5 1.5c0 0.219-0.047 0.422-0.125 0.609 2.688 0.391 4.672 1.906 5.734 3.75l6.531-5.672c0.203-0.172 0.531-0.156 0.703 0.063z"></path>
+		</symbol>
+		</defs>
+		</svg>
 	</body>
 </html>
