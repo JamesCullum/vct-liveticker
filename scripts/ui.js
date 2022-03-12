@@ -162,7 +162,7 @@ function get_time_diff(dateTime)
 	if(mm > 0) return mm + "M";
 	
 	var ss = Math.floor(msec / 1000);
-	if(msec > 0) return msec + "S";
+	if(msec > 0) return ss + "S";
 	
 	return "NOW";
 }
