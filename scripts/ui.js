@@ -52,7 +52,7 @@ function limitExpandItems(containerSelector, childSelector, expandBreakpoint) {
 			if(i == expandBreakpoint) {
 				eventItem.append(`<div class="col-12 d-block d-sm-none expand-items" data-breakpoint="`+expandBreakpoint+`">
 					<div class="d-grid gap-2">
-						<button class="btn btn-lg btn-primary" type="button">See more</button>
+						<button class="btn btn-lg btn-primary" type="button" aria-label="See more">See more</button>
 					</div>
 				</div>`)
 			} else if(i > expandBreakpoint) {

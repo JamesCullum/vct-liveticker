@@ -4,7 +4,7 @@ if(Notification.permission != "granted") {
 		$(".body-container").append(`<div class="alert alert-danger mb-4">
 			Subscriptions are tied to the notification profile of your browser.
 			Currently you have denied notification permission, which means we cannot identify your browser.<br>
-			<button type="button" class="btn btn-light enable-notifications">Sign In</button>
+			<button type="button" class="btn btn-light enable-notifications" aria-label="Sign In">Sign In</button>
 		</div>`)
 	}
 }
@@ -36,19 +36,19 @@ subscriptionUpdateUIWait(() => {
 						<select class="form-select" id="sub-events" multiple disabled>
 							<option>You are not subscribed to any events</option>
 						</select>
-						<button class="btn btn-danger sub-clear-events" type="button" disabled>Clear</button>
+						<button class="btn btn-danger sub-clear-events" type="button" disabled aria-label="Clear">Clear</button>
 					</div>
                 </div>
 				<div class="form-group mt-3">
                     <label for="sub-events" class="form-label">Matches</label>
                     <div class="input-group">
 						<input type="text" class="form-control" id="sub-matches" value="You are not subscribed to any match updates" disabled>
-						<button class="btn btn-danger sub-clear-matches" type="button" disabled>Clear</button>
+						<button class="btn btn-danger sub-clear-matches" type="button" disabled aria-label="Clear">Clear</button>
 					</div>
                 </div>
 				<div class="mt-5">
-					<button type="submit" class="btn btn-danger" id="sub-reset">Unsubscribe from everything</button>
-					<button type="submit" class="btn btn-primary pull-right" id="sub-apply-change">Save Changes</button>
+					<button type="submit" class="btn btn-danger" id="sub-reset" aria-label="Unsubscribe from everything">Unsubscribe from everything</button>
+					<button type="submit" class="btn btn-primary pull-right" id="sub-apply-change" aria-label="Save Changes">Save Changes</button>
 				</div>
 		</form>
 	`)

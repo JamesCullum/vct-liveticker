@@ -8,7 +8,7 @@ if(!supportsNotification) {
 	
 	if(!localStorage.getItem("disabled-unsupported-device")) {
 		$(".body-container").prepend(`<div class="alert alert-dismissible alert-danger mb-4" id="notification-unsupported-start-hint">
-			<button type="button" class="btn-close" data-bs-dismiss="alert" id="notification-unsupported-hint"></button>
+			<button type="button" class="btn-close" data-bs-dismiss="alert" id="notification-unsupported-hint" aria-label="Hide alert"></button>
 			The device or browser you are using does not support the <a href="https://caniuse.com/push-api" target="_blank" rel="noopener noreferrer">Web Push API</a>.
 			Push notifications are not available, but you can still use this web application to stay up-to-date.
 			Even though you won't get a notification, match information will automatically refresh and you can filter the regions and matches of your choice.
@@ -22,9 +22,9 @@ if(!supportsNotification) {
 	initNotificationProfile().then(() => {})
 } else if(!localStorage.getItem("disabled-notification-hint")) {
 	$(".body-container").prepend(`<div class="alert alert-dismissible alert-info mb-4" id="notification-start-hint">
-		<button type="button" class="btn-close" data-bs-dismiss="alert" id="disabled-notification-hint"></button>
+		<button type="button" class="btn-close" data-bs-dismiss="alert" id="disabled-notification-hint" aria-label="Hide alert"></button>
 		If you want to receive push notifications or live updates, please enable notifications.<br>
-		<button type="button" class="btn btn-light enable-notifications">Start receiving updates</button>
+		<button type="button" class="btn btn-light enable-notifications" aria-label="Start receiving updates, enable notifications">Start receiving updates</button>
 	</div>`)
 	
 	$("#disabled-notification-hint").click(function(evt) {

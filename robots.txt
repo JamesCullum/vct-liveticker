@@ -1,0 +1,5 @@
+User-agent: *
+
+Disallow:
+
+Sitemap: https://vct-liveticker.pages.dev/sitemap.xml  
