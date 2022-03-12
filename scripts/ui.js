@@ -86,6 +86,7 @@ function getMatchItem(matchData, opts) {
 	$(".card-header .left-info .stage-name", thisMatchItem).text(opts.eventTitle ? matchData.event : matchData.stage)
 	$(".card-header .left-info .event-date", thisMatchItem).text(dateFormat(date))
 	$(".card-header .right-info .status-label", thisMatchItem).text(statusLookup[matchData.status].toUpperCase())
+	$("a.detail-link", thisMatchItem).attr("href", "https://www.vlr.gg/" + matchData.id + "/details")
 	
 	let timeDiff = get_time_diff_label(matchData.status, date)
 	$(".card-header .right-info .event-date-diff", thisMatchItem).html(timeDiff).attr("data-timestamp", date.getTime()).attr("data-status", matchData.status)

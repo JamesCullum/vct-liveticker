@@ -13,25 +13,28 @@
 		<meta name="msapplication-TileColor" content="#da532c">
 		<meta name="theme-color" content="#47b3ff">
 		
-		<link rel="preconnect" href="https://www.gstatic.com">
 		<link rel="preconnect" href="https://www.google.com">
+		<link rel="preconnect" href="https://gstatic.com">
+		<link rel="preconnect" href="https://fonts.gstatic.com">
+		<link rel="preconnect" href="https://firestore.googleapis.com">
 		<link rel="preconnect" href="https://fcmregistrations.googleapis.com">
+		<link rel="preconnect" href="https://cdnjs.cloudflare.com">
 		
 		<title>VCT Ticker</title>
 		
-		<script src="https://cdnjs.cloudflare.com/ajax/libs/jquery/3.6.0/jquery.min.js" integrity="sha512-894YE6QWD5I59HgZOGReFYm4dnWc1Qt5NtvYSaNcOP+u1T9qYdvdihz0PPSiiqn/+/3e7Jo4EaG7TubfWGUrMQ==" crossorigin="anonymous" referrerpolicy="no-referrer" defer></script>
-		<script src="/scripts/bootstrap.bundle.min.js" async></script>
+		<script defer src="https://cdnjs.cloudflare.com/ajax/libs/jquery/3.6.0/jquery.min.js" integrity="sha512-894YE6QWD5I59HgZOGReFYm4dnWc1Qt5NtvYSaNcOP+u1T9qYdvdihz0PPSiiqn/+/3e7Jo4EaG7TubfWGUrMQ==" crossorigin="anonymous" referrerpolicy="no-referrer"></script>
+		<script async src="/scripts/bootstrap.bundle.min.js"></script>
 		
-		<script src="https://www.gstatic.com/firebasejs/9.6.7/firebase-app-compat.js" defer></script>
-		<script src="https://www.gstatic.com/firebasejs/9.6.7/firebase-app-check-compat.js" defer></script>
-		<script src="https://www.gstatic.com/firebasejs/9.6.7/firebase-messaging-compat.js" defer></script>
-		<script src="https://www.gstatic.com/firebasejs/9.6.7/firebase-firestore-compat.js" defer></script>
+		<script defer src="https://cdnjs.cloudflare.com/ajax/libs/firebase/9.6.8/firebase-app-compat.min.js" integrity="sha512-OUr2v45dj0h7Ek7snkshtQ0O9z/fY1xtPKXsaDklnX3hf5h2pP3IV4sRw2CGeo2zuaAD5l3IpE89u6Hmap9ArQ==" crossorigin="anonymous" referrerpolicy="no-referrer"></script>
+		<script defer src="https://cdnjs.cloudflare.com/ajax/libs/firebase/9.6.8/firebase-app-check-compat.min.js" integrity="sha512-SnpFIe5sHvi62EYSZeh52u9JjnjCwKDiJyTKb2Z8oyorKfOgN0h3nOOT6oHbGO9aqySggWOwuVVGOZKKqf6ZLA==" crossorigin="anonymous" referrerpolicy="no-referrer"></script>
+		<script defer src="https://cdnjs.cloudflare.com/ajax/libs/firebase/9.6.8/firebase-messaging-compat.min.js" integrity="sha512-53gwOM+qRiJ+yEAOEyRqJck5SgOHXNyYslQkWkdbgct4VMe0qdsCmrMvrd7lFkjKnYew7w7pz0LR0GV+1AOtXA==" crossorigin="anonymous" referrerpolicy="no-referrer"></script>
+		<script defer src="https://cdnjs.cloudflare.com/ajax/libs/firebase/9.6.8/firebase-firestore-compat.min.js" integrity="sha512-32qKuWSzDG/c5z045i8AudHn39esgNu7t+M5PFepCwVK8H4Vq0czO617OUKYWYEYKTV0lvmD7pIwR2VqRmVgIA==" crossorigin="anonymous" referrerpolicy="no-referrer"></script>
 		
-		<script src="/scripts/firebase.js" defer></script>
-		<script src="/scripts/notifications.js" defer></script>
-		<script src="/scripts/ui.js" defer></script>
+		<script defer src="/scripts/firebase.js" ></script>
+		<script defer src="/scripts/notifications.js"></script>
+		<script defer src="/scripts/ui.js"></script>
 		
-		<link rel="stylesheet" href="/css/bootstrap.min.css">
+		<link rel="stylesheet" href="/css/bootstrap_slim.min.css">
 		<link rel="stylesheet" href="/css/custom.css">
 	</head>
 	<body>
@@ -66,7 +69,7 @@
 				</li>
 			  </ul>
 			  <ul class="navbar-nav ms-md-auto">
-				<li class="nav-item" id="menu-profile">
+				<li class="nav-item push-enabled" id="menu-profile">
 				  <a href="#" class="nav-link sign-in"><svg class="icon icon-user"><use xlink:href="#icon-user"></use></svg> Sign In</a>
 				</li>
 			  </ul>
@@ -98,14 +101,14 @@
 					<div class="event-title-bar">
 						<div class="row">
 							<h2 class="col-lg-8"><span class="event-name"></span></h2>
-							<div class="col-lg-4 text-right d-none d-lg-block sub-right">
+							<div class="col-lg-4 text-right d-none d-lg-block sub-right push-enabled">
 								<button type="button" class="btn btn-primary btn-lg notification-subscribe"><svg class="icon icon-bell"><use xlink:href="#icon-bell"></use></svg> Subscribe to event updates</button>
 								<button type="button" class="btn btn-secondary btn-lg notification-unsubscribe d-none"><svg class="icon icon-bell-slash"><use xlink:href="#icon-bell-slash"></use></svg> Unsubscribe from event updates</button>
 							</div>
 						</div>
 					</div>
 					<div class="row match-list-container expand-container"></div>
-					<div class="sub-bottom mt-2 d-lg-none">
+					<div class="sub-bottom push-enabled mt-2 d-lg-none">
 						<div class="d-grid gap-2">
 							<button type="button" class="btn btn-primary btn-lg notification-subscribe"><svg class="icon icon-bell"><use xlink:href="#icon-bell"></use></svg> Subscribe to event updates</button>
 							<button type="button" class="btn btn-secondary btn-lg notification-unsubscribe d-none"><svg class="icon icon-bell-slash"><use xlink:href="#icon-bell-slash"></use></svg> Unsubscribe from event updates</button>
@@ -142,23 +145,28 @@
 					</div>
 					
 					<div class="card-footer">
-						<div class="row">
-							<div class="notification-subscribe">
-								<button type="button" class="btn btn-sm"><svg class="icon icon-bell"><use xlink:href="#icon-bell"></use></svg> Subscribe to match updates</button>
+						<div class="row push-enabled">
+							<div class="col-8">
+								<div class="notification-subscribe">
+									<button type="button" class="btn btn-sm"><svg class="icon icon-bell"><use xlink:href="#icon-bell"></use></svg> Subscribe to match updates</button>
+								</div>
+								<div class="notification-unsubscribe d-none">
+									<button type="button" class="btn btn-sm"><svg class="icon icon-bell-slash"><use xlink:href="#icon-bell-slash"></use></svg> Unsubscribe from match updates</button>
+								</div>
 							</div>
-							<div class="notification-unsubscribe d-none">
-								<button type="button" class="btn btn-sm"><svg class="icon icon-bell-slash"><use xlink:href="#icon-bell-slash"></use></svg> Unsubscribe from match updates</button>
+							<div class="col-4 text-right">
+								<a href="#" class="detail-link" target="_blank" rel="noopener noreferrer">Details</a>
+							</div>
+						</div>
+						<div class="row push-disabled">
+							<div class="col-12">
+								<a href="#" class="detail-link" target="_blank" rel="noopener noreferrer">Details</a>
 							</div>
 						</div>
 					</div>
 				</div>
 			</div>
 		</div>
-		
-		<!-- debug 
-		<script src="https://cdnjs.cloudflare.com/ajax/libs/eruda/2.4.1/eruda.min.js" integrity="sha512-RrQDQUon0OiQVjKQYkMuhtLgx8R/4niagIVdHltxcAJa1+cc8FJFFOhtLuK3YJAoo5mdfAFh98ZQwbDKJgFIpg==" crossorigin="anonymous" referrerpolicy="no-referrer"></script>
-		<script>eruda.init();</script>
-		-->
 		
 		<!-- Icons -->
 		<svg aria-hidden="true" style="position: absolute; width: 0; height: 0; overflow: hidden;" version="1.1" xmlns="http://www.w3.org/2000/svg" xmlns:xlink="http://www.w3.org/1999/xlink">

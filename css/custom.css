@@ -83,6 +83,22 @@ body {
 	margin-top: -0.25em; /* fix positioning */
 }
 
+a.detail-link {
+	color: var(--bs-secondary);
+	text-decoration: none;
+	display: inline-block;
+	margin-top: 5px;
+	font-size: .9rem;
+}
+
+/* If push is not supported */
+body:not(.no-push) .push-disabled {
+	display: none !important;
+}
+body.no-push .push-enabled { 
+	display: none !important;
+}
+
 /* loading.io CSS */
 .lds-ellipsis {
   display: block;

@@ -4,7 +4,7 @@ const supportsNotification = ('Notification' in window)
 
 if(!supportsNotification) {
 	var hideSubscribe = $('<style>.sub-right, .sub-bottom, .match-list-container .card-footer, #menu-profile { display: none !important; }</style>');
-	$('html > head').append(hideSubscribe)
+	$('body').addClass("no-push")
 	
 	if(!localStorage.getItem("disabled-unsupported-device")) {
 		$(".body-container").prepend(`<div class="alert alert-dismissible alert-danger mb-4" id="notification-unsupported-start-hint">
