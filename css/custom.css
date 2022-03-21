@@ -156,3 +156,20 @@ body.no-push .push-enabled {
     transform: translate(24px, 0);
   }
 }
+
+/* Dark mode */
+body.dark {
+	--bs-primary-rgb: 18,18,18;
+	--bs-body-bg: #303030;
+	--bs-secondary: #47B3FF;
+	color: white;
+}
+
+body.dark .card, body.dark select, body.dark input, body.dark .dropdown-menu {
+	background-color: #424242 !important;
+	color: white;
+}
+
+body.dark .btn, body.dark form, body.dark .dropdown-item {
+	color: white;
+}

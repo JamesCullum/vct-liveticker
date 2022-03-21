@@ -11,6 +11,10 @@ if((match = /^\/(\w*)/.exec(window.location.pathname)) !== null) {
 pageScript.src = "/scripts/page-" + scriptName + ".js"
 document.head.appendChild(pageScript)
 
+// Dark mode
+if(window.matchMedia && window.matchMedia("(prefers-color-scheme: dark)").matches) {
+	$("body").addClass("dark")
+}
 
 // Methods
 function sortBySubscription(containerSelector, childSelector, childSubSelector, func) {
