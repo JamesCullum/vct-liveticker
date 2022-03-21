@@ -12,8 +12,51 @@ pageScript.src = "/scripts/page-" + scriptName + ".js"
 document.head.appendChild(pageScript)
 
 // Dark mode
-if(window.matchMedia && window.matchMedia("(prefers-color-scheme: dark)").matches) {
-	$("body").addClass("dark")
+$("a.lightswitch").click(function(e) {
+	e.preventDefault()
+	$(this).blur()
+	
+	const currentIteration = $(this).attr("data-setting")
+	switch($(this).attr("data-setting")) {
+		case "auto":
+			return setLightScheme("dark", true)
+		case "dark":
+			return setLightScheme("light", true)
+		case "light":
+			return setLightScheme("auto", true)
+	}
+})
+
+let lightSetting = localStorage.getItem("light")
+if(!lightSetting) lightSetting = "auto"
+if(window.matchMedia && window.matchMedia("(prefers-color-scheme: dark)").matches && lightSetting == "auto") {
+	setLightScheme("dark", false)
+} else {
+	setLightScheme(lightSetting, false)
+}
+
+function setLightScheme(scheme, save) {
+	if(save) localStorage.setItem("light", scheme)
+	
+	const label = {
+		auto: `<svg class="icon icon-brightness-contrast"><use xlink:href="#icon-brightness-contrast"></use></svg> Auto`,
+		dark: `<svg class="icon icon-moon-o"><use xlink:href="#icon-moon-o"></use></svg> Dark`,
+		light: `<svg class="icon icon-sun-o"><use xlink:href="#icon-sun-o"></use></svg> Light`,
+	}
+	
+	$("a.lightswitch").attr("data-setting", scheme).html(label[scheme])
+	
+	if(scheme == "dark") {
+		$("body").addClass("dark")
+	} else if(scheme == "light") {
+		$("body").removeClass("dark")
+	} else {
+		if(window.matchMedia && window.matchMedia("(prefers-color-scheme: dark)").matches) {
+			$("body").addClass("dark")
+		} else {
+			$("body").removeClass("dark")
+		}
+	}
 }
 
 // Methods
