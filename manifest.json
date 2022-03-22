@@ -1,3 +1,75 @@
 {
-  "gcm_sender_id": "331171673427"
+    "name": "Live-Ticker for Valorant Championship Tour",
+    "short_name": "Ticker for VCT",
+	"description": "Track current matches of the Valorant Champions Tour and receive push notifications for the latest match and event results",
+    "icons": [
+        {
+            "src": "/android-chrome-192x192.png",
+            "sizes": "192x192",
+            "type": "image/png"
+        },
+        {
+            "src": "/android-chrome-256x256.png",
+            "sizes": "256x256",
+            "type": "image/png"
+        },
+		{
+            "src": "/android-chrome-512x512.png",
+            "sizes": "512x512",
+            "type": "image/png"
+        }
+    ],
+    "theme_color": "#47b3ff",
+    "background_color": "#ffffff",
+	"start_url": "/",
+    "display": "standalone",
+	"gcm_sender_id": "331171673427",
+	"lang": "en-US",
+	"orientation": "any",
+	"screenshots": [{
+		"src": "/.github/light-1.png",
+		"sizes": "1920x919",
+		"type": "image/png",
+		"platform": "wide",
+		"label": "Event Overview in Light Mode"
+	},{
+		"src": "/.github/light-2.png",
+		"sizes": "1920x919",
+		"type": "image/png",
+		"platform": "wide",
+		"label": "Subscription Management Dashboard in Light Mode"
+	},{
+		"src": "/.github/dark-1.png",
+		"sizes": "1920x919",
+		"type": "image/png",
+		"platform": "wide",
+		"label": "Event Overview in Dark Mode"
+	},{
+		"src": "/.github/mobile-light-1.png",
+		"sizes": "375x1286",
+		"type": "image/png",
+		"platform": "narrow",
+		"label": "Mobile Event Overview in Light Mode"
+	},{
+		"src": "/.github/mobile-dark-1.png",
+		"sizes": "375x1286",
+		"type": "image/png",
+		"platform": "narrow",
+		"label": "Mobile Event Overview in Dark Mode"
+	}],
+	"categories": [
+		"entertainment",
+		"games",
+		"news",
+		"sports"
+	],
+	"shortcuts" : [{
+		"name": "Events",
+		"url": "/events",
+		"description": "Currently ongoing events and matches"
+	},{
+		"name": "Manage Notifications",
+		"url": "/subscriptions",
+		"description": "Unsubscribe from notifications for events and matches"
+	}]
 }
