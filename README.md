@@ -13,6 +13,13 @@ allowing you to track current matches of the [Valorant Champions Tour](https://w
 * **Personalized Feed:** We move to the front what matters to you the most. Events and matches you subscribe are always on top. Matches are sorted by the time distance 
 * **Optimized for mobile:** Smooth experience on the phone and smaller screens, very little data usage needed.
 
+**Screenshots**
+<img alt="Event Overview in Light Mode" src="https://raw.githubusercontent.com/JamesCullum/vct-liveticker/main/.github/light-1.png" width="200"/>
+<img alt="Subscription Management Dashboard in Light Mode" src="https://raw.githubusercontent.com/JamesCullum/vct-liveticker/main/.github/light-2.png" width="200"/>
+<img alt="Event Overview in Dark Mode" src="https://raw.githubusercontent.com/JamesCullum/vct-liveticker/main/.github/dark1.png" width="200"/>
+<img alt="Mobile Event Overview in Light Mode" src="https://raw.githubusercontent.com/JamesCullum/vct-liveticker/main/.github/mobile-light-1.png" width="200"/>
+<img alt="Mobile Event Overview in Dark Mode" src="https://raw.githubusercontent.com/JamesCullum/vct-liveticker/main/.github/mobile-dark-1.png" width="200"/>
+
 **How to contribute**
 
 [![Open in Gitpod](https://gitpod.io/button/open-in-gitpod.svg)](https://gitpod.io/#https://github.com/JamesCullum/vct-liveticker)

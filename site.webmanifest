@@ -1,6 +1,7 @@
 {
-    "name": "VCT Liveticker",
-    "short_name": "VCT Ticker",
+    "name": "Live-Ticker for Valorant Championship Tour",
+    "short_name": "Ticker for VCT",
+	"description": "Track current matches of the Valorant Champions Tour and receive push notifications for the latest match and event results",
     "icons": [
         {
             "src": "/android-chrome-192x192.png",
@@ -22,5 +23,38 @@
     "background_color": "#ffffff",
 	"start_url": "/",
     "display": "standalone",
-	"gcm_sender_id": "331171673427"
+	"gcm_sender_id": "331171673427",
+	"lang": "en-US",
+	"orientation": "any",
+	"screenshots": [{
+		"src": "https://raw.githubusercontent.com/JamesCullum/vct-liveticker/main/.github/light-1.png",
+		"sizes": "1920x919",
+		"type": "image/png",
+		"platform": "wide",
+		"label": "Event Overview in Light Mode"
+	},{
+		"src": "https://raw.githubusercontent.com/JamesCullum/vct-liveticker/main/.github/light-2.png",
+		"sizes": "1920x919",
+		"type": "image/png",
+		"platform": "wide",
+		"label": "Subscription Management Dashboard in Light Mode"
+	},{
+		"src": "https://raw.githubusercontent.com/JamesCullum/vct-liveticker/main/.github/dark-1.png",
+		"sizes": "1920x919",
+		"type": "image/png",
+		"platform": "wide",
+		"label": "Event Overview in Dark Mode"
+	},{
+		"src": "https://raw.githubusercontent.com/JamesCullum/vct-liveticker/main/.github/mobile-light-1.png",
+		"sizes": "375x1286",
+		"type": "image/png",
+		"platform": "narrow",
+		"label": "Mobile Event Overview in Light Mode"
+	},{
+		"src": "https://raw.githubusercontent.com/JamesCullum/vct-liveticker/main/.github/mobile-dark-1.png",
+		"sizes": "375x1286",
+		"type": "image/png",
+		"platform": "narrow",
+		"label": "Mobile Event Overview in Dark Mode"
+	}]
 }
