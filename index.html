@@ -33,6 +33,11 @@
 		<script defer src="/scripts/firebase.js" ></script>
 		<script defer src="/scripts/notifications.js"></script>
 		<script defer src="/scripts/ui.js"></script>
+		<script defer type="module">
+			import 'https://cdn.jsdelivr.net/npm/@pwabuilder/pwaupdate'
+			const el = document.createElement('pwa-update')
+			document.body.appendChild(el)
+		</script>
 		
 		<link rel="stylesheet" href="/css/bootstrap_slim.min.css">
 		<link rel="stylesheet" href="/css/custom.css">
