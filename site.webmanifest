@@ -27,31 +27,31 @@
 	"lang": "en-US",
 	"orientation": "any",
 	"screenshots": [{
-		"src": "/.github/light-1.png",
+		"src": "https://raw.githubusercontent.com/JamesCullum/vct-liveticker/main/.github/light-1.png",
 		"sizes": "1920x919",
 		"type": "image/png",
 		"platform": "wide",
 		"label": "Event Overview in Light Mode"
 	},{
-		"src": "/.github/light-2.png",
+		"src": "https://raw.githubusercontent.com/JamesCullum/vct-liveticker/main/.github/light-2.png",
 		"sizes": "1920x919",
 		"type": "image/png",
 		"platform": "wide",
 		"label": "Subscription Management Dashboard in Light Mode"
 	},{
-		"src": "/.github/dark-1.png",
+		"src": "https://raw.githubusercontent.com/JamesCullum/vct-liveticker/main/.github/dark-1.png",
 		"sizes": "1920x919",
 		"type": "image/png",
 		"platform": "wide",
 		"label": "Event Overview in Dark Mode"
 	},{
-		"src": "/.github/mobile-light-1.png",
+		"src": "https://raw.githubusercontent.com/JamesCullum/vct-liveticker/main/.github/mobile-light-1.png",
 		"sizes": "375x1286",
 		"type": "image/png",
 		"platform": "narrow",
 		"label": "Mobile Event Overview in Light Mode"
 	},{
-		"src": "/.github/mobile-dark-1.png",
+		"src": "https://raw.githubusercontent.com/JamesCullum/vct-liveticker/main/.github/mobile-dark-1.png",
 		"sizes": "375x1286",
 		"type": "image/png",
 		"platform": "narrow",
