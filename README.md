@@ -19,11 +19,11 @@ allowing you to track current matches of the [Valorant Champions Tour](https://w
 
 <img alt="Event Overview in Light Mode" src="https://raw.githubusercontent.com/JamesCullum/vct-liveticker/main/.github/light-1.png" width="400"/> <img alt="Subscription Management Dashboard in Light Mode" src="https://raw.githubusercontent.com/JamesCullum/vct-liveticker/main/.github/light-2.png" width="400"/> <img alt="Event Overview in Dark Mode" src="https://raw.githubusercontent.com/JamesCullum/vct-liveticker/main/.github/dark-1.png" width="400"/>
 
-***Mobile View***
+**Mobile View**
 
 <img alt="Mobile Event Overview in Light Mode" src="https://raw.githubusercontent.com/JamesCullum/vct-liveticker/main/.github/mobile-light-1.png" height="400"/> <img alt="Mobile Event Overview in Dark Mode" src="https://raw.githubusercontent.com/JamesCullum/vct-liveticker/main/.github/mobile-dark-1.png" height="400"/>
 
-## How to contribute**
+## How to contribute
 
 [![Open in Gitpod](https://gitpod.io/button/open-in-gitpod.svg)](https://gitpod.io/#https://github.com/JamesCullum/vct-liveticker)
 
