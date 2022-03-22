@@ -56,5 +56,15 @@
 		"type": "image/png",
 		"platform": "narrow",
 		"label": "Mobile Event Overview in Dark Mode"
+	}],
+	"categories": ["entertainment", "games", "news", "sports"],
+	"shortcuts" : [{
+		"name": "Events",
+		"url": "/events",
+		"description": "Currently ongoing events and matches"
+	},{
+		"name": "Manage Notifications",
+		"url": "/subscriptions",
+		"description": "Unsubscribe from notifications for events and matches"
 	}]
 }
