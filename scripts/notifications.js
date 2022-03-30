@@ -114,6 +114,7 @@ async function initNotificationProfile(onlyFromServer) {
 		subscription._updated = subscription._updated.toDate()
 	} else {
 		subscription = JSON.parse(loadSubscription)
+		subscription._updated = new Date(subscription._updated)
 	}
 	console.log("Subscriptions: ", subscription)
 	
