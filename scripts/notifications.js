@@ -45,7 +45,7 @@ $("body").on("click", ".enable-notifications", function(evt) {
 
 // Notification & Subscription
 window.msgToken = false
-window.subscription = {events: [], matches: [], mocked: true}
+window.subscription = {events: [], matches: [], mocked: true, _updated: 0}
 window.ownSubRef = false
 $("body").on("click", ".notification-subscribe, .notification-unsubscribe", async function(evt) {
 	if(!msgToken) {
@@ -78,7 +78,7 @@ $("body").on("click", ".notification-subscribe, .notification-unsubscribe", asyn
 	subscriptionUpdateUI()
 })
 
-async function initNotificationProfile() {
+async function initNotificationProfile(onlyFromServer) {
 	try {
 		msgToken = await messaging.getToken({vapidKey: "BHsrbLQQiNSDUQzw6EgeO-45Arty5Pct9lDQWevJpsL2bzts_o0BZL7MmZt7lDcoFjd2mSumps5UByzBaboPCxU"})
 	} catch(error) {
@@ -98,14 +98,23 @@ async function initNotificationProfile() {
 	$("#menu-profile").html(`<a class="nav-link" href="/subscriptions">Manage Subscriptions</a>`)
 	
 	// Check current subscriptions
-	const querySnapshot = await ownSubRef.get()
-	if(!querySnapshot.exists) {
-		console.log("doesnt exist yet");
-		delete subscription.mocked
-		return false
+	const loadSubscription = localStorage.getItem(msgToken)
+	if(loadSubscription === null || onlyFromServer === false) {
+		const querySnapshot = await ownSubRef.get()
+		if(!querySnapshot.exists) {
+			console.log("doesnt exist yet")
+			delete subscription.mocked
+			subscription._updated = new Date()
+			
+			localStorage.setItem(msgToken, JSON.stringify(subscription))
+			return false
+		}
+		
+		subscription = querySnapshot.data()
+		subscription._updated = subscription._updated.toDate()
+	} else {
+		subscription = JSON.parse(loadSubscription)
 	}
-	subscription = querySnapshot.data()
-	subscription._updated = subscription._updated.toDate()
 	console.log("Subscriptions: ", subscription)
 	
 	subscriptionUpdateUI()
@@ -116,6 +125,7 @@ function syncNewSubscriptions() {
 	subscription._synced = false
 	
 	console.log("Subscription to sync", subscription)
+	localStorage.setItem(msgToken, JSON.stringify(subscription))
 	return ownSubRef.set(subscription)
 }
 

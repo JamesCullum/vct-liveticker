@@ -9,8 +9,10 @@ if(Notification.permission != "granted") {
 	}
 }
 
-subscriptionUpdateUIWait(() => {
+subscriptionUpdateUIWait(async () => {
 	$("#loader").remove()
+	
+	await initNotificationProfile(true)
 	
 	$(".body-container").append(`
 		<form id="subscription-form">
