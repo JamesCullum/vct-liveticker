@@ -64,6 +64,8 @@ db.collection("events").doc("current").onSnapshot(doc => {
 	sortBySubscription("#event-list", ".event-item", ".event-title-bar", () => {
 		sortBySubscription("#event-list .match-list-container", ".match-item", ".card-footer", () => {
 			limitExpandItems("#event-list .match-list-container", ".match-item", 3)
+			
+			subscriptionUpdateUI()
 		})
 	})
 	

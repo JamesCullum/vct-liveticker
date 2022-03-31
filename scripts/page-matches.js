@@ -63,7 +63,9 @@ function loadMatchPage(moveForward) {
 			loadBtn.removeClass("d-none")
 		}
 		
-		sortBySubscription(".match-list-container", ".match-item", ".card-footer")
+		sortBySubscription(".match-list-container", ".match-item", ".card-footer", () => {
+			subscriptionUpdateUI()
+		})
 	})
 }
 
