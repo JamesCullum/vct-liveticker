@@ -88,7 +88,7 @@ function sortBySubscription(containerSelector, childSelector, childSubSelector, 
 function limitExpandItems(containerSelector, childSelector, expandBreakpoint) {
 	$(containerSelector).each(function() {
 		const eventItem = $(this)
-		if(eventItem.has(".expand-items")) return;
+		if($(".expand-items", eventItem).length) return;
 		
 		let i = 0
 		const childs = $(childSelector, eventItem)
