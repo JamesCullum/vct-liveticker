@@ -86,9 +86,9 @@ function sortBySubscription(containerSelector, childSelector, childSubSelector, 
 
 // Collapsible for mobile
 function limitExpandItems(containerSelector, childSelector, expandBreakpoint) {
-	if($(containerSelector).has(".expand-items")) return;
 	$(containerSelector).each(function() {
 		const eventItem = $(this)
+		if(eventItem.has(".expand-items")) return;
 		
 		let i = 0
 		const childs = $(childSelector, eventItem)
