@@ -1,4 +1,5 @@
-
+const filterList = [{label: "Global", filter:["Masters"]}, "EMEA", "Latin America", "Philippines", "North America", "Thailand", "Brazil", "Korea", "Japan"]
+const filterListLookup = {"Global": 0}
 db.collection("events").doc("current").onSnapshot(doc => {
 	const docData = doc.data()
 	delete docData._updated
@@ -53,9 +54,16 @@ db.collection("events").doc("current").onSnapshot(doc => {
 	// Filter, based on results from Champions 21
 	// https://liquipedia.net/valorant/VALORANT_Champions_Tour/2021/Champions
 	$("#event-list").prepend(`<div class="row"><div class="event-filter-list mb-2"></div></div>`)
-	const filterList = ["EMEA", "Latin America", "Philippines", "North America", "Thailand", "Brazil", "Korea", "Japan"]
 	for(const filterVal of filterList) {
-		$(".event-filter-list").append(`<button type="button" class="btn btn-secondary btn-sm">`+filterVal+`</button>`)
+		let thisLabel;
+		const filterValType = typeof filterVal;
+		if(filterValType === "string") {
+			thisLabel = filterVal
+		} else if(filterValType === "object" && "label" in filterVal) {
+			thisLabel = filterVal.label
+		}
+		
+		$(".event-filter-list").append(`<button type="button" class="btn btn-secondary btn-sm">`+thisLabel+`</button>`)
 	}
 	
 	loadFilters()
@@ -68,7 +76,6 @@ db.collection("events").doc("current").onSnapshot(doc => {
 			subscriptionUpdateUI()
 		})
 	})
-	
 })
 
 $("body").on("click", ".event-filter-list .btn", function(evt) {
@@ -103,7 +110,15 @@ function filterContains(label) {
 	if(!label) return false
 	
 	for(const filterVal of filters) {
-		if(label.indexOf(filterVal) != -1) return true
+		if(filterVal in filterListLookup) {
+			// Advanced filters
+			for(const subFilterVal of filterList[filterListLookup[filterVal]].filter) {
+				if(label.indexOf(subFilterVal) != -1) return true
+			}
+		} else {
+			// Normal filters
+			if(label.indexOf(filterVal) != -1) return true
+		}
 	}
 	return false
 }
@@ -122,7 +137,14 @@ function applyFilters() {
 	})
 	btnSel.each(function() {
 		const label = $(this).text()
-		if(filterContains(label)) $(this).removeClass("btn-secondary").addClass("btn-primary")
+		
+		for(const filterVal of filters) {
+			const filterValType = typeof filterVal;
+			if((filterValType === "string" && label == filterVal) ||
+				(filterValType === "object" && "label" in filterVal && label == filterVal.label)) {
+				$(this).removeClass("btn-secondary").addClass("btn-primary")
+			}
+		}
 	})
 }
 
