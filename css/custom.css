@@ -59,8 +59,9 @@ body {
 	color: #888;
 }
 
-.match-status-1 .right-info {
+.match-status-1 .right-info, .match-status-1 .right-info a {
 	color: #ce3b54;
+	text-decoration: none;
 }
 
 .match-status-2 .right-info {

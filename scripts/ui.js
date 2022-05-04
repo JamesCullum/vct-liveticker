@@ -136,8 +136,12 @@ function getMatchItem(matchData, opts) {
 	$(".card-header .right-info .status-label", thisMatchItem).text(statusLookup[matchData.status].toUpperCase())
 	$("a.detail-link", thisMatchItem).attr("href", "https://www.vlr.gg/" + matchData.id + "/details")
 	
-	let timeDiff = get_time_diff_label(matchData.status, date)
+	let timeDiff = get_time_diff_label(matchData.status, date, matchData.stream)
 	$(".card-header .right-info .event-date-diff", thisMatchItem).html(timeDiff).attr("data-timestamp", date.getTime()).attr("data-status", matchData.status)
+	if(matchData.stream) {
+		$(".card-header .right-info .event-date-diff", thisMatchItem).attr("data-stream", matchData.stream)
+		$(".card-header .right-info", thisMatchItem).html('<a href="'+matchData.stream+'" target="_blank" rel="noopener noreferrer">'+ $(".card-header .right-info", thisMatchItem).html() + '</a>')
+	}
 	
 	$('.team-side[data-team=0] .team-name', thisMatchItem).text(matchData.team1)
 	let score1 = "map1" in matchData ? matchData.map1 : "-"
@@ -157,10 +161,11 @@ setInterval(function() {
 	$(".card-header .right-info .event-date-diff").not("[data-status=1]").each(function() {
 		tmpStatus = parseInt($(this).attr("data-status"))
 		timestampRaw = parseInt($(this).attr("data-timestamp"))
+		streamLink = $(this).attr("data-stream")
 		if(!timestampRaw) return true
 		tmpDate = new Date(timestampRaw)
 		
-		let timeDiff = get_time_diff_label(tmpStatus, tmpDate)
+		let timeDiff = get_time_diff_label(tmpStatus, tmpDate, streamLink)
 		$(this).html(timeDiff)
 	})
 }, 1000)
@@ -181,11 +186,15 @@ function removeItemOnce(arr, value) {
 	return arr;
 }
 
-function get_time_diff_label(matchStatus, dateTime) {
+function get_time_diff_label(matchStatus, dateTime, streamLink) {
 	let timeDiff = get_time_diff(dateTime)
 	
 	if(matchStatus == 1) {
-		return '<svg class="icon icon-circle"><use xlink:href="#icon-circle"></use></svg>'
+		if(!streamLink) {
+			return '<svg class="icon icon-circle"><use xlink:href="#icon-circle"></use></svg>'
+		} else {
+			return '<svg class="icon icon-video-camera"><use xlink:href="#icon-video-camera"></use></svg>';
+		}
 	} else if(matchStatus == 2) {
 		return timeDiff + " AGO"
 	} else {
