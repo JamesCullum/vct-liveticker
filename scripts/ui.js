@@ -138,7 +138,7 @@ function getMatchItem(matchData, opts) {
 	
 	let timeDiff = get_time_diff_label(matchData.status, date, matchData.stream)
 	$(".card-header .right-info .event-date-diff", thisMatchItem).html(timeDiff).attr("data-timestamp", date.getTime()).attr("data-status", matchData.status)
-	if(matchData.stream) {
+	if(matchData.stream && matchData.status == 1) {
 		$(".card-header .right-info .event-date-diff", thisMatchItem).attr("data-stream", matchData.stream)
 		$(".card-header .right-info", thisMatchItem).html('<a href="'+matchData.stream+'" target="_blank" rel="noopener noreferrer">'+ $(".card-header .right-info", thisMatchItem).html() + '</a>')
 	}
