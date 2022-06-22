@@ -24,12 +24,6 @@ subscriptionUpdateUIWait(async () => {
 						<p id="sub-updated">Never</p>
 					</div>
 				</div>
-				<div class="form-group row">
-					<p class="col-4 col-sm-2">Synchronized</label>
-					<div class="col-8 col-sm-10 text-right">
-						<p id="sub-synced">Yes</p>
-					</div>
-				</div>
 				<div class="form-group">
                     <label for="sub-events" class="form-label">
 						Events
@@ -56,11 +50,7 @@ subscriptionUpdateUIWait(async () => {
 	`)
 	
 	if(!("_updated" in subscription)) return console.log("Currently no server profile")
-	
 	$("#sub-updated").text(dateFormat(subscription._updated))
-	if(!subscription._synced) {
-		$("#sub-synced").text("No - please wait up to five minutes")
-	}
 	
 	if(subscription.events.length > 0) {
 		$("#sub-events option").remove()
