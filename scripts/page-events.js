@@ -1,4 +1,4 @@
-const filterList = [{label: "Global", filter:["Masters"]}, "EMEA", "Latin America", "Philippines", "North America", "Thailand", "Brazil", "Korea", "Japan"]
+const filterList = [{label: "Global", filter:["Masters", "Champions"]}, "EMEA", "Latin America", "Philippines", "North America", "Thailand", "Brazil", "Korea", "Japan"]
 const filterListLookup = {"Global": 0}
 db.collection("events").doc("current").onSnapshot(doc => {
 	const docData = doc.data()
