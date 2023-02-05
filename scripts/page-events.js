@@ -1,4 +1,13 @@
-const filterList = [{label: "Global", filter:["Masters", "Champions"]}, "EMEA", "Latin America", "Philippines", "North America", "Thailand", "Brazil", "Korea", "Japan"]
+const filterList = [
+	{label: "Global", filter:["Masters", "Champions", "LOCK//IN"]}, 
+	"Americas League", "Pacific League", "EMEA League", // International leagues
+	// Challengers
+	"Brazil", "North America", "Korea", 
+	{label: "East Europe", filter: ["East Surge"]}, "Northern Europe", 
+	"LATAM", "Singapore", "Japan", "Indeonesia", "Thailand", 
+	"DACH", "Spain", "France", "Italy", "Portugal", "Turkey",
+	"Philippines", "Oceania", "MENA"
+]
 const filterListLookup = {"Global": 0}
 db.collection("events").doc("current").onSnapshot(doc => {
 	const docData = doc.data()
