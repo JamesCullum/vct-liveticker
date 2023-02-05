@@ -3,8 +3,8 @@ const filterList = [
 	"Americas League", "Pacific League", "EMEA League", // International leagues
 	// Challengers
 	"Brazil", "North America", "Korea", 
-	{label: "East Europe", filter: ["East Surge"]}, "Northern Europe", 
-	"LATAM", "Singapore", "Japan", "Indeonesia", "Thailand", 
+	{label: "Eastern Europe", filter: ["East Surge"]}, "Northern Europe", 
+	"LATAM", "Singapore", "Japan", "Indonesia", "Thailand", 
 	"DACH", "Spain", "France", "Italy", "Portugal", "Turkey",
 	"Philippines", "Oceania", "MENA"
 ]
