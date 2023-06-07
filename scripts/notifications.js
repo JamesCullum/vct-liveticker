@@ -7,7 +7,7 @@ if(!supportsNotification) {
 	$('body').addClass("no-push")
 	
 	if(!localStorage.getItem("ios-require-homescreen") && /iPad|iPhone|MacIntel/.test(navigator.platform)) {
-		$(".body-container").prepend(`<div class="alert alert-dismissible alert-warning mb-4" id="notification-ios-hint">
+		$(".body-container").prepend(`<div class="alert alert-dismissible alert-danger mb-4" id="notification-ios-hint">
 			<button type="button" class="btn-close" data-bs-dismiss="alert" id="notification-unsupported-hint" aria-label="Hide alert"></button>
 			Add <b>Liveticker for VCT</b> to your homescreen to enable push notifications for events and matches. 
 			Tap <b>Share <svg class="icon icon-ios_share"><use xlink:href="#icon-ios_share"></use></svg></b> and then 
