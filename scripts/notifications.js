@@ -1,12 +1,24 @@
 
 // Profile
-const supportsNotification = ('Notification' in window)
+const supportsNotification = ('Notification' in window) && firebase.messaging.isSupported()
 
 if(!supportsNotification) {
 	var hideSubscribe = $('<style>.sub-right, .sub-bottom, .match-list-container .card-footer, #menu-profile { display: none !important; }</style>');
 	$('body').addClass("no-push")
 	
-	if(!localStorage.getItem("ios-require-homescreen") && /iPad|iPhone|MacIntel/.test(navigator.platform)) {
+	if(!firebase.messaging.isSupported()) {
+		if(!localStorage.getItem("fcm-not-supported")) {
+			$(".body-container").prepend(`<div class="alert alert-dismissible alert-danger mb-4" id="notification-fcm-hint">
+				<button type="button" class="btn-close" data-bs-dismiss="alert" id="notification-unsupported-hint" aria-label="Hide alert"></button>
+				The device or browser you are using is not supported by the Google Cloud Messaging (or it's deactivated by default, like in the Brave browser).
+				You will not be able to use push notifications, but can still access live updates.
+			</div>`)
+			
+			$("#notification-fcm-hint").click(function(evt) {
+				localStorage.setItem("fcm-not-supported", "1")
+			})
+		}
+	} /*else if(!localStorage.getItem("ios-require-homescreen") && /iPad|iPhone|MacIntel/.test(navigator.platform)) {
 		$(".body-container").prepend(`<div class="alert alert-dismissible alert-danger mb-4" id="notification-ios-hint">
 			<button type="button" class="btn-close" data-bs-dismiss="alert" id="notification-unsupported-hint" aria-label="Hide alert"></button>
 			Add <b>Liveticker for VCT</b> to your homescreen to enable push notifications for events and matches. 
@@ -17,7 +29,7 @@ if(!supportsNotification) {
 		$("#notification-ios-hint").click(function(evt) {
 			localStorage.setItem("ios-require-homescreen", "1")
 		})
-	} else if(!localStorage.getItem("disabled-unsupported-device")) {
+	}*/ else if(!localStorage.getItem("disabled-unsupported-device")) {
 		$(".body-container").prepend(`<div class="alert alert-dismissible alert-danger mb-4" id="notification-unsupported-start-hint">
 			<button type="button" class="btn-close" data-bs-dismiss="alert" id="notification-unsupported-hint" aria-label="Hide alert"></button>
 			The device or browser you are using does not support the <a href="https://caniuse.com/push-api" target="_blank" rel="noopener noreferrer">Web Push API</a>.
